@@ -8,4 +8,6 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: ping_google
-        run: ping google.com
+        run: 
+          systeminfo
+          ipconfig
