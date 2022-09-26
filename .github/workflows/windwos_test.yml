@@ -1,0 +1,11 @@
+name: windows test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ping_google:
+    runs-on: windows-latest
+    steps:
+      - name: ping_google
+        run: ping google.com
