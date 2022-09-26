@@ -1,0 +1,15 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Google_Drive_Organizer_V3"
+        xmlns:Pages="clr-namespace:Google_Drive_Organizer_V3.Pages" xmlns:Controls="clr-namespace:Google_Drive_Organizer_V3.Controls" x:Class="Google_Drive_Organizer_V3.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="441" Width="667" MinHeight="441" MinWidth="667">
+    <Grid x:Name="MainWindow_Grid">
+        <Pages:SelectFolderPage Select_Folder_Finish="SelectFolder_Control_Select_Folder_Finish" x:Name="SelectFolder_Control" HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Stretch"/>
+
+        <!--<Controls:CircleSwitch></Controls:CircleSwitch>-->
+    </Grid>
+</Window>

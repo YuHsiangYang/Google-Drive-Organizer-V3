@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="Google_Drive_Organizer_V3.Controls.DragEnterIcon_With_Animation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Google_Drive_Organizer_V3.Controls"
+             xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+             mc:Ignorable="d" 
+             d:DesignHeight="599.861" d:DesignWidth="500">
+    <UserControl.Resources>
+        <Storyboard x:Key="Animation" RepeatBehavior="Forever">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Arrow_SVG" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" AccelerationRatio="0.4" DecelerationRatio="0.1">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="-50"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="TextAnimation">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Text_ViewBox" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="Text_ViewBox" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="00:00:00.3000000" Value="40,40,40,40"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    <Grid Initialized="Grid_Initialized">
+        <Viewbox>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="487"/>
+                    <RowDefinition Height="204"/>
+                </Grid.RowDefinitions>
+                <svgc:SvgViewbox Source=".\icons\Drag\Container.svg" Margin="0,302,0,0"></svgc:SvgViewbox>
+                <svgc:SvgViewbox x:Name="Arrow_SVG" Source=".\icons\Drag\Arrow.svg" Margin="100">
+                    <svgc:SvgViewbox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </svgc:SvgViewbox.RenderTransform>
+                </svgc:SvgViewbox>
+                <Viewbox x:Name="Text_ViewBox" Grid.Row="1" Height="107" Margin="40,0,40,40" VerticalAlignment="Top">
+                    <Viewbox.RenderTransform>
+                        <TranslateTransform>
+                        </TranslateTransform>
+                    </Viewbox.RenderTransform>
+                    <Label Content="請將資料夾拖曳至此" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" />
+                </Viewbox>
+            </Grid>
+        </Viewbox>
+    </Grid>
+</UserControl>
