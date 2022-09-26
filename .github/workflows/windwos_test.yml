@@ -7,7 +7,7 @@ jobs:
   ping_google:
     runs-on: windows-latest
     steps:
-      - name: ping_google
+      - name: system_info
         run: 
           systeminfo
           ipconfig
