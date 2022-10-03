@@ -146,10 +146,13 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem
 
         private void EXIF_ProgressChanged(object sender, LoadEXIFRecord_ProgressReportModule e)
         {
-            //MatchingProgress.percentage = 1;
             MatchingProgress.percentage = ((double)e.CurrentItem + 1) / (double)e.TotalItems;
             ItemsForDisplay.Add(e.EXIFData);
             ImageExif_Record.Images.Add(e.EXIFData);
+            if (ImageExif_Record.Images.Count % (int)Properties.Settings.Default["Page_Size"] == 0)
+            {
+                Pages.LoadRange(ImageExif_Record.Images.Count);
+            }
             if (Matched_Item_Stackpanel.Children.Count < 30)
             {
                 Matched_Item_Stackpanel.Children.Add(new MatchItem_Child(e.EXIFData));
@@ -172,7 +175,6 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem
 
         private async void SortInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //ItemsForDisplay.Clear();
             ItemsForDisplay = await SortResult(ImageExif_Record.Images, (SortManner)Sort_Manner.SelectedItem, (SortType)Sort_Type.SelectedItem);
             ShowPage((int)Properties.Settings.Default["page_number"]);
         }
@@ -541,7 +543,7 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem
         private void ShowAllItems()
         {
             List<MatchItem_Child> childs = new List<MatchItem_Child>();
-            Pages.LoadRange(Matched_Items.Count);
+            //Pages.LoadRange(ImageExif_Record.Images.Count);
             Matched_Item_Stackpanel.Children.Clear();
             for (int i = ((int)Properties.Settings.Default["page_number"] - 1) * 30; i < (int)Properties.Settings.Default["page_number"] * 30; i++)
             {

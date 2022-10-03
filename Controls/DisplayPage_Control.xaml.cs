@@ -30,7 +30,7 @@ namespace Google_Drive_Organizer_V3.Controls
         public void LoadRange(int quantities)
         {
             DisplayPanel.Children.Clear();
-            pages = (int)Math.Ceiling((double)quantities / 30);
+            pages = (int)Math.Ceiling((double)quantities / (int)Properties.Settings.Default["Page_Size"]);
             int total = pages++;
             for (int i = 1; i < total; i++)
             {

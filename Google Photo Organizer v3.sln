@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google Drive Organizer V3", "Google Drive Organizer V3.csproj", "{AE10957E-E3D0-4A0C-87DB-D528B259FA3F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google Photo Organizer v3", "Google Photo Organizer v3.csproj", "{AE10957E-E3D0-4A0C-87DB-D528B259FA3F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functions", "..\Functions\Functions.csproj", "{61516EFD-C668-4FAD-A397-C5214A43DD58}"
 EndProject

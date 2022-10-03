@@ -40,5 +40,14 @@ namespace Google_Drive_Organizer_V3.Properties {
                 return ((int)(this["page_number"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int Page_Size {
+            get {
+                return ((int)(this["Page_Size"]));
+            }
+        }
     }
 }

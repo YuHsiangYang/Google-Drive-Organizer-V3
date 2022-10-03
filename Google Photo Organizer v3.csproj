@@ -111,14 +111,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ButtonCustomProperties.cs" />
+    <Compile Include="Classes\ButtonCustomProperties.cs" />
+    <Compile Include="Classes\Display types\Display_Icon.cs" />
+    <Compile Include="Classes\Display types\Display_List.cs" />
+    <Compile Include="Classes\Display types\IDisplayInterface.cs" />
     <Compile Include="Controls\Cannot_Find_Search_Result.xaml.cs">
       <DependentUpon>Cannot_Find_Search_Result.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\CircleSwitch.xaml.cs">
       <DependentUpon>CircleSwitch.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DisplayPage\DisplayPage_Control.xaml.cs">
+    <Compile Include="Controls\DisplayPage_Control.xaml.cs">
       <DependentUpon>DisplayPage_Control.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\DisplayType.xaml.cs">
@@ -131,10 +134,10 @@
       <DependentUpon>Search_By_FileName.xaml</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="History.cs" />
-    <Compile Include="LoadEXIFRecord_ProgressReportModule.cs" />
-    <Compile Include="MatchItem_Record.cs" />
-    <Compile Include="MatchingProgress_Report.cs" />
+    <Compile Include="Classes\History.cs" />
+    <Compile Include="Classes\LoadEXIFRecord_ProgressReportModule.cs" />
+    <Compile Include="Classes\MatchItem_Record.cs" />
+    <Compile Include="Classes\MatchingProgress_Report.cs" />
     <Compile Include="Pages\MatchItem\ImageExif_Class.cs" />
     <Compile Include="Pages\MatchItem\ImageExif_Function.cs" />
     <Compile Include="Pages\MatchItem\ImageExif_Record.cs" />
@@ -151,8 +154,8 @@
     <Compile Include="Pages\SelectDistination\SelectOutputDestination.xaml.cs">
       <DependentUpon>SelectOutputDestination.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SelectedFolder_Record.cs" />
-    <Compile Include="UniversalFunctions.cs" />
+    <Compile Include="Classes\SelectedFolder_Record.cs" />
+    <Compile Include="Classes\UniversalFunctions.cs" />
     <Resource Include="ApplicationResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -167,7 +170,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\DisplayPage\DisplayPage_Control.xaml">
+    <Page Include="Controls\DisplayPage_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -326,8 +329,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
