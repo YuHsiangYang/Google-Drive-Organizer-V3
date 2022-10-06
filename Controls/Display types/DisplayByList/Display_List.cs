@@ -19,7 +19,10 @@ namespace Google_Drive_Organizer_V3.Classes.Display_types
             {
                 try
                 {
-                    children.Add(new MatchItem_Child(History.MatchedItem.ItemsForDisplay[i]));
+                    children.Add(new MatchItem_Child(History.MatchedItem.ItemsForDisplay[i])
+                    {
+                        HorizontalAlignment = HorizontalAlignment.Stretch,
+                    });
 
                 }
                 catch (Exception)

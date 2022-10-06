@@ -21,6 +21,8 @@ using Newtonsoft.Json;
 using System.Windows.Media.Animation;
 using System.Reflection;
 using System.Windows.Forms;
+using Google_Drive_Organizer_V3.Classes;
+using Google_Drive_Organizer_V3.Classes.Display_types;
 
 namespace Google_Drive_Organizer_V3.Pages.MatchItem
 {
@@ -48,6 +50,7 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem
         public Search_By_FileName SearchFileName { get; set; } = new Search_By_FileName();
         CancellationTokenSource search_cancel_cts = new CancellationTokenSource();
         public List<ImageExif_Class> ItemsForDisplay = new List<ImageExif_Class>();
+        IDisplayInterface displayInterface;
 
         /// <summary>
         /// 排序的類型
@@ -137,6 +140,17 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem
             //await UniversalFunctions.Load_Image_Detail_Record_Async(progression, Cancel_LoadDetailRecord.Token);
             //Console.WriteLine(Matched_Item_Stackpanel.Children.Count);
             Pages.PageChanged += page_changed;
+            switch (display_type.Display_Type)
+            {
+                case TypeOfDisplay.ListView:
+                    displayInterface = new Display_List();
+                    break;
+                case TypeOfDisplay.ImageView:
+                    displayInterface = new Display_Icon();
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void Loadmatch_progress_ProgressChanged(object sender, LoadEXIFRecord_ProgressReportModule e)
@@ -165,18 +179,29 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem
 
         private void page_changed(int number)
         {
-            ShowPage(number);
+            displayInterface.ShowPage(number);
         }
 
         private void Display_type_DisplayTypeChanged(TypeOfDisplay obj)
         {
             Console.WriteLine(obj.ToString());
+            switch (obj)
+            {
+                case TypeOfDisplay.ListView:
+                    displayInterface = new Display_List();
+                    break;
+                case TypeOfDisplay.ImageView:
+                    displayInterface = new Display_Icon();
+                    break;
+                default:
+                    break;
+            }
         }
 
         private async void SortInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ItemsForDisplay = await SortResult(ImageExif_Record.Images, (SortManner)Sort_Manner.SelectedItem, (SortType)Sort_Type.SelectedItem);
-            ShowPage((int)Properties.Settings.Default["page_number"]);
+            displayInterface.ShowPage((int)Properties.Settings.Default["page_number"]);
         }
         public async Task<List<ImageExif_Class>> SortResult(List<ImageExif_Class> inputs, SortManner sortManner, SortType sortType)
         {

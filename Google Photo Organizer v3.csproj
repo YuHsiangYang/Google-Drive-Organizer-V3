@@ -112,9 +112,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\ButtonCustomProperties.cs" />
-    <Compile Include="Classes\Display types\Display_Icon.cs" />
-    <Compile Include="Classes\Display types\Display_List.cs" />
-    <Compile Include="Classes\Display types\IDisplayInterface.cs" />
+    <Compile Include="Controls\Display types\DisplayByIcon\Display_Icon.cs" />
+    <Compile Include="Controls\Display types\DisplayByList\Display_List.cs" />
+    <Compile Include="Controls\Display types\IDisplayInterface.cs" />
     <Compile Include="Controls\Cannot_Find_Search_Result.xaml.cs">
       <DependentUpon>Cannot_Find_Search_Result.xaml</DependentUpon>
     </Compile>
@@ -124,32 +124,35 @@
     <Compile Include="Controls\DisplayPage_Control.xaml.cs">
       <DependentUpon>DisplayPage_Control.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DisplayType.xaml.cs">
-      <DependentUpon>DisplayType.xaml</DependentUpon>
+    <Compile Include="Controls\Display types\DisplayTypeSwitch.xaml.cs">
+      <DependentUpon>DisplayTypeSwitch.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DragEnterIcon_With_Animation.xaml.cs">
-      <DependentUpon>DragEnterIcon_With_Animation.xaml</DependentUpon>
+    <Compile Include="Controls\DragSelectControl.xaml.cs">
+      <DependentUpon>DragSelectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Search_By_FileName.xaml.cs">
-      <DependentUpon>Search_By_FileName.xaml</DependentUpon>
+    <Compile Include="Controls\FileNameSearch.xaml.cs">
+      <DependentUpon>FileNameSearch.xaml</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Classes\History.cs" />
     <Compile Include="Classes\LoadEXIFRecord_ProgressReportModule.cs" />
     <Compile Include="Classes\MatchItem_Record.cs" />
     <Compile Include="Classes\MatchingProgress_Report.cs" />
-    <Compile Include="Pages\MatchItem\ImageExif_Class.cs" />
-    <Compile Include="Pages\MatchItem\ImageExif_Function.cs" />
-    <Compile Include="Pages\MatchItem\ImageExif_Record.cs" />
-    <Compile Include="Pages\MatchItem\LoadImageDetail_ProgressModule.cs" />
-    <Compile Include="Pages\MatchItem\MatchItem_Container.xaml.cs">
+    <Compile Include="Classes\ImageExif_Class.cs" />
+    <Compile Include="Classes\ImageExif_Function.cs" />
+    <Compile Include="Classes\ImageExif_Record.cs" />
+    <Compile Include="Classes\LoadImageDetail_ProgressModule.cs" />
+    <Compile Include="Controls\Display types\DisplayByIcon\Match_Display_Icon.xaml.cs">
+      <DependentUpon>Match_Display_Icon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MatchItem_Container.xaml.cs">
       <DependentUpon>MatchItem_Container.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MatchItem\MatchItem_Child.xaml.cs">
-      <DependentUpon>MatchItem_Child.xaml</DependentUpon>
+    <Compile Include="Controls\Display types\DisplayByList\Match_Display_List.xaml.cs">
+      <DependentUpon>Match_Display_List.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MatchItem\Search_Date_UserControl.xaml.cs">
-      <DependentUpon>Search_Date_UserControl.xaml</DependentUpon>
+    <Compile Include="Controls\PhotoTakenTimeSearch.xaml.cs">
+      <DependentUpon>PhotoTakenTimeSearch.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SelectDistination\SelectOutputDestination.xaml.cs">
       <DependentUpon>SelectOutputDestination.xaml</DependentUpon>
@@ -174,14 +177,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\DisplayType.xaml">
+    <Page Include="Controls\Display types\DisplayTypeSwitch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\DragEnterIcon_With_Animation.xaml">
+    <Page Include="Controls\DragSelectControl.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Search_By_FileName.xaml">
+    <Page Include="Controls\FileNameSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -198,15 +202,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\MatchItem\MatchItem_Container.xaml">
+    <Page Include="Controls\Display types\DisplayByIcon\Match_Display_Icon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\MatchItem\MatchItem_Child.xaml">
+    <Page Include="Pages\MatchItem_Container.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\MatchItem\Search_Date_UserControl.xaml">
+    <Page Include="Controls\Display types\DisplayByList\Match_Display_List.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PhotoTakenTimeSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -223,10 +231,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SelectFolder\SelectFolderPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="rest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -270,17 +274,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Delete.svg" />
     <Content Include="icons\Ban.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icons\Delete.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="icons\Display types\Image.svg">
+    <Content Include="Controls\Display types\Icons\Image.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="icons\Display types\List item.svg">
+    <Content Include="Controls\Display types\Icons\List item.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icons\Drag\Arrow.svg">
@@ -302,14 +305,9 @@
     <Content Include="icons\Search\Cannot_Find_Result.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Pages\MatchItem\Delete.svg" />
     <Content Include="Scripts\Read_EXIF.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Pages\MatchItem\1571126087810.jpeg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\1571126087810.jpeg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Functions\Functions.csproj">

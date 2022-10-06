@@ -30,6 +30,7 @@ namespace Google_Drive_Organizer_V3.Controls
         Duration animation_duration = TimeSpan.FromSeconds(.15);
         public event Action<TypeOfDisplay> DisplayTypeChanged;
         Button previous_displaytype = new Button();
+        public TypeOfDisplay Display_Type { get; private set; } = new TypeOfDisplay();
         private void ChangeDisplayTypeTrigger_Clicked(object sender, RoutedEventArgs e)
         {
             ThicknessAnimation animation = new ThicknessAnimation();
@@ -51,6 +52,7 @@ namespace Google_Drive_Organizer_V3.Controls
                 animation.DecelerationRatio = 0.3;
                 SelectedDisplayType_Rectangle.BeginAnimation(MarginProperty, animation);
                 DisplayTypeChanged(display);
+                Display_Type = display;
                 previous_displaytype = send;
             }
         }

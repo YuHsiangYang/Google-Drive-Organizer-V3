@@ -320,10 +320,20 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem
                 //animation end
             }
             await Task.Delay(Height_Animation_Duration);
-            Image_Match.Background = new ImageBrush(new BitmapImage(new Uri(EXIF.Image_Location)))
-            {
-                Stretch = Stretch.Uniform
-            };
+            BitmapImage display_image = new BitmapImage();
+            display_image.BeginInit();
+            display_image.UriSource = new Uri(EXIF.Image_Location);
+            display_image.DecodePixelHeight = (int)Image_Match.RenderSize.Height * 2;
+            //display_image.DecodePixelWidth = (int)Image_Match.RenderSize.Width;
+            display_image.EndInit();
+            ImageBrush image = new ImageBrush();
+            image.ImageSource = display_image;
+            image.Stretch = Stretch.Uniform;
+            Image_Match.Background = image;
+            //Image_Match.Background = new ImageBrush(new BitmapImage(new Uri(EXIF.Image_Location)) { DecodePixelHeight = 1, DecodePixelWidth = 1})
+            //{
+            //    Stretch = Stretch.Uniform,
+            //};
             Height_Expanded = true;
         }
         public async Task Collaps_Height()
