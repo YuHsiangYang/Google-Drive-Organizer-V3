@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Google_Drive_Organizer_V3.Pages.MatchItem"
              mc:Ignorable="d" 
              xmlns:svgc="http://sharpvectors.codeplex.com/svgc/" xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             d:DesignHeight="220.176" d:DesignWidth="800" Margin="2" MouseMove="MainControl_MouseMove" Loaded="MainControl_Loaded">
+             d:DesignHeight="220.176" d:DesignWidth="800" Margin="2">
     <UserControl.Resources>
         <sys:Double x:Key="Border_Radius">7</sys:Double>
         <sys:Double x:Key="Font_Size">14</sys:Double>
@@ -61,9 +61,9 @@
                 <Border.CornerRadius>
                     <CornerRadius TopLeft="{StaticResource Border_Radius}" BottomLeft="{StaticResource Border_Radius}" TopRight="{StaticResource Border_Radius}" BottomRight="{StaticResource Border_Radius}"></CornerRadius>
                 </Border.CornerRadius>
-            <svgc:SvgViewbox Source="\icons\Delete.svg" Grid.Column="1" Margin="7"></svgc:SvgViewbox>
+                <svgc:SvgViewbox Source="\icons\Delete.svg" Grid.Column="1" Margin="7"></svgc:SvgViewbox>
             </Border>
-            <Button Opacity="0" x:Name="Delete_Item_Trigger" Click="Delete_Item_Trigger_Click"></Button>
+            <Button Opacity="0" x:Name="Delete_Item_Trigger"></Button>
         </Grid>
 
         <Grid Grid.Column="2">
@@ -89,7 +89,7 @@
             <Viewbox>
                 <Label Name="ImageName" Content="Image" FontSize="{StaticResource Font_Size_Title}" ></Label>
             </Viewbox>
-            <Viewbox Grid.Column="1" MouseUp="Expend_Info_MouseUP" Cursor="Hand">
+            <Viewbox Grid.Column="1" Cursor="Hand">
                 <Label Name="JsonName" Content="Json" FontSize="{StaticResource Font_Size_Title}"></Label>
             </Viewbox>
             <Grid Grid.Row="1" Grid.Column="0">
@@ -133,7 +133,7 @@
                             <TranslateTransform></TranslateTransform>
                         </Label.RenderTransform>
                     </Label>
-                    <Button Opacity="0"  x:Name="Open_Image_Trigger" Click="Open_Image_Trigger_Click"></Button>
+                    <Button Opacity="0"  x:Name="Open_Image_Trigger"></Button>
                 </Grid>
                 <!--<ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="1">-->
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
@@ -227,7 +227,7 @@
                 <!--</StackPanel>-->
                 <!--</ScrollViewer>-->
             </Grid>
-            <Border x:Name="Detail_Bornder" Cursor="Hand" Grid.ColumnSpan="2" MouseUp="Expend_Info_MouseUP" Background="#00000000"/>
+            <Border x:Name="Detail_Bornder" Cursor="Hand" Grid.ColumnSpan="2" Background="#00000000"/>
         </Grid>
     </Grid>
 </UserControl>

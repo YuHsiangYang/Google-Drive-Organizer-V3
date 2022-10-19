@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functions", "..\Functions\F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google Drive Organizer V3Tests3", "..\Google Drive Organizer V3Tests3\Google Drive Organizer V3Tests3.csproj", "{28C198B0-8C03-4C3E-A42E-4BD72E6266E7}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DisplayPanel_UnitTests", "..\DisplayPanel_UnitTests\DisplayPanel_UnitTests.csproj", "{9A00908E-0187-41BE-B70D-E2AE4296152E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{28C198B0-8C03-4C3E-A42E-4BD72E6266E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28C198B0-8C03-4C3E-A42E-4BD72E6266E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28C198B0-8C03-4C3E-A42E-4BD72E6266E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A00908E-0187-41BE-B70D-E2AE4296152E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A00908E-0187-41BE-B70D-E2AE4296152E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A00908E-0187-41BE-B70D-E2AE4296152E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A00908E-0187-41BE-B70D-E2AE4296152E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

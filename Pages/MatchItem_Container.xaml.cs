@@ -49,7 +49,7 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem
         public ResourceDictionary ApplicationResources { get; set; } = new ResourceDictionary();
         public Search_By_FileName SearchFileName { get; set; } = new Search_By_FileName();
         CancellationTokenSource search_cancel_cts = new CancellationTokenSource();
-        public List<ImageExif_Class> ItemsForDisplay = new List<ImageExif_Class>();
+        public List<ImageExif> ItemsForDisplay = new List<ImageExif>();
         IDisplayInterface displayInterface;
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem
             Matched_Items = await LoadMatch(Folders, loadmatch_progress, CancelAllTasks.Token);
             Progress<LoadEXIFRecord_ProgressReportModule> progress = new Progress<LoadEXIFRecord_ProgressReportModule>();
             progress.ProgressChanged += EXIF_ProgressChanged;
-            await ImageExif_Function.Load_Image_EXIF_Record(CancelAllTasks.Token, progress);
+            await ImageExif_Functions.Load_Image_EXIF_Record(CancelAllTasks.Token, progress);
             ShowAllItems();
             //Progress<MatchingProgress_Report> progression = new Progress<MatchingProgress_Report>();
             //progression.ProgressChanged += Matching_ProgressChanged;
@@ -151,6 +151,7 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem
                 default:
                     break;
             }
+            //displayInterface.InitializePage(Matched_Item_ScrollViewer);
         }
 
         private void Loadmatch_progress_ProgressChanged(object sender, LoadEXIFRecord_ProgressReportModule e)
@@ -184,7 +185,6 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem
 
         private void Display_type_DisplayTypeChanged(TypeOfDisplay obj)
         {
-            Console.WriteLine(obj.ToString());
             switch (obj)
             {
                 case TypeOfDisplay.ListView:
@@ -200,72 +200,10 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem
 
         private async void SortInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ItemsForDisplay = await SortResult(ImageExif_Record.Images, (SortManner)Sort_Manner.SelectedItem, (SortType)Sort_Type.SelectedItem);
+            ItemsForDisplay = await ImageExif_Functions.SortResult(ImageExif_Record.Images, (SortManner)Sort_Manner.SelectedItem, (SortType)Sort_Type.SelectedItem);
             displayInterface.ShowPage((int)Properties.Settings.Default["page_number"]);
         }
-        public async Task<List<ImageExif_Class>> SortResult(List<ImageExif_Class> inputs, SortManner sortManner, SortType sortType)
-        {
-            List<ImageExif_Class> sorted = new List<ImageExif_Class>();
-            switch (sortType)
-            {
-                case SortType.拍攝日期:
-                    await Task.Run(() => inputs.Sort(SortByDate));
-                    if (sortManner == SortManner.遞減)
-                    {
-                        inputs.Reverse();
-                    }
-                    break;
-                case SortType.檔案名稱:
-                    await Task.Run(() => inputs.Sort(SortByFileName));
-                    if (sortManner == SortManner.遞減)
-                    {
-                        inputs.Reverse();
-                    }
-                    break;
-                default:
-                    break;
-            }
-            sorted = inputs;
-            return inputs;
-        }
-        private static int SortByDate(ImageExif_Class x, ImageExif_Class y)
-        {
-            if (x.Json_PhotoTakenTime_DateTime == null)
-            {
-                if (y.Json_PhotoTakenTime_DateTime == null)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return -1;
-                }
-            }
-            else
-            {
-                if (y.Json_PhotoTakenTime_DateTime == null)
-                {
-                    return -1;
-                }
-                else
-                {
-                    return x.Json_PhotoTakenTime_DateTime.CompareTo(y.Json_PhotoTakenTime_DateTime);
-                }
-            }
-        }
-        private static int SortByFileName(ImageExif_Class x, ImageExif_Class y)
-        {
-            int retval = 0;
-            try
-            {
-                retval = x.Image_Location.CompareTo(y.Image_Location);
-            }
-            catch (Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message, "錯誤");
-            }
-            return retval;
-        }
+        
         private async void SearchFileName_SearchFileActivated(string obj)
         {
             ItemsForDisplay = await SearchByFileName(obj, search_cancel_cts.Token);
@@ -342,11 +280,10 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem
             {
                 ItemsForDisplay.Clear();
                 ItemsForDisplay = await SearchByPhotoTakenTime(obj);
-                ShowPage(1);
+                displayInterface.ShowPage((int)Properties.Settings.Default["page_number"]);
             }
             else
             {
-                ShowAllItems();
             }
             GC.Collect();
             //RoutedEventArgs routedEventArgs = new RoutedEventArgs();
@@ -359,10 +296,10 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem
             Console.WriteLine((double)e.Current_Item / (double)e.Total_Items);
             Console.WriteLine(e.Total_Items);
         }
-        public async Task<List<ImageExif_Class>> SearchByFileName(string FileName, CancellationToken cts)
+        public async Task<List<ImageExif>> SearchByFileName(string FileName, CancellationToken cts)
         {
-            List<ImageExif_Class> founded = new List<ImageExif_Class>();
-            founded = await Task.Run(() => ImageExif_Record.Images.FindAll(x => System.IO.Path.GetFileName(x.Image_Location).Contains(FileName)).ToList());
+            List<ImageExif> founded = new List<ImageExif>();
+            founded = await Task.Run(() => ImageExif_Record.Images.FindAll(x => System.IO.Path.GetFileName(x.ImagePath).Contains(FileName)).ToList());
             List<MatchItem_Child> children = new List<MatchItem_Child>();
             //foreach (ImageExif_Class item in founded)
             //{
@@ -371,16 +308,16 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem
             //Console.WriteLine("Found " + founded.Count);
             return founded;
         }
-        public async Task<List<ImageExif_Class>> SearchByPhotoTakenTime(Dictionary<string, string> inputs)
+        public async Task<List<ImageExif>> SearchByPhotoTakenTime(Dictionary<string, string> inputs)
         {
-            List<ImageExif_Class> founded = new List<ImageExif_Class>();
+            List<ImageExif> founded = new List<ImageExif>();
             List<MatchItem_Child> children = new List<MatchItem_Child>();
             List<MatchItem_Child> children_return = new List<MatchItem_Child>();
             //List<string> Inputs = ((string[])inputs).ToList();
             Console.WriteLine(inputs.Values.ToList());
             if (inputs.Values.ToList().FindAll(item => item == "全部").Count == 3)
             {
-                foreach (ImageExif_Class item in ImageExif_Record.Images)
+                foreach (ImageExif item in ImageExif_Record.Images)
                 {
                     children.Add(new MatchItem_Child(item));
                 }
@@ -401,7 +338,7 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem
                         //{
                         //    Console.WriteLine(itemm.Photo_TakenTime_Dictionary[year_month_day]);
                         //}
-                        List<ImageExif_Class> temp_found = await Task.Run(() => ImageExif_Record.Images.FindAll(images => images.Photo_TakenTime_Dictionary[year_month_day] == int.Parse(item.Value)));
+                        List<ImageExif> temp_found = await Task.Run(() => ImageExif_Record.Images.FindAll(images => images.Photo_TakenTime_Dictionary[year_month_day] == int.Parse(item.Value)));
 
                         founded.AddRange(temp_found);
                     }
@@ -423,7 +360,7 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem
             switch (Search_Type.SelectedIndex)
             {
                 case 0://json photo taken time
-                    List<ImageExif_Class> founded = new List<ImageExif_Class>();
+                    List<ImageExif> founded = new List<ImageExif>();
                     if (SearchDate.Search_Input_Year.SelectedItem.ToString() != "全部")
                     {
                         if (founded.Count == 0)
@@ -463,7 +400,7 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem
 
                         Console.WriteLine("Item founded in input date" + founded.Count);
                         Matched_Item_Stackpanel.Children.Clear();
-                        foreach (ImageExif_Class item in founded)
+                        foreach (ImageExif item in founded)
                         {
                             Matched_Item_Stackpanel.Children.Add(new MatchItem_Child(item));
                         }

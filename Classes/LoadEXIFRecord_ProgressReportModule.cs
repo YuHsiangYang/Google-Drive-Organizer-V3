@@ -1,4 +1,4 @@
-﻿using Google_Drive_Organizer_V3.Pages.MatchItem;
+﻿using Google_Drive_Organizer_V3.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace Google_Drive_Organizer_V3
 {
     public class LoadEXIFRecord_ProgressReportModule
     {
-        public ImageExif_Class EXIFData { get; set; }
+        public ImageExif EXIFData { get; set; }
         public int CurrentItem { get; set; }
         public int TotalItems { get; set; }
     }

@@ -92,6 +92,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -114,6 +115,9 @@
     <Compile Include="Classes\ButtonCustomProperties.cs" />
     <Compile Include="Controls\Display types\DisplayByIcon\Display_Icon.cs" />
     <Compile Include="Controls\Display types\DisplayByList\Display_List.cs" />
+    <Compile Include="Controls\Display types\DisplayByList\Match_Display_List.xaml.cs">
+      <DependentUpon>Match_Display_List.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Display types\IDisplayInterface.cs" />
     <Compile Include="Controls\Cannot_Find_Search_Result.xaml.cs">
       <DependentUpon>Cannot_Find_Search_Result.xaml</DependentUpon>
@@ -127,6 +131,9 @@
     <Compile Include="Controls\Display types\DisplayTypeSwitch.xaml.cs">
       <DependentUpon>DisplayTypeSwitch.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DisplayPanel.xaml.cs">
+      <DependentUpon>DisplayPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DragSelectControl.xaml.cs">
       <DependentUpon>DragSelectControl.xaml</DependentUpon>
     </Compile>
@@ -138,18 +145,15 @@
     <Compile Include="Classes\LoadEXIFRecord_ProgressReportModule.cs" />
     <Compile Include="Classes\MatchItem_Record.cs" />
     <Compile Include="Classes\MatchingProgress_Report.cs" />
-    <Compile Include="Classes\ImageExif_Class.cs" />
-    <Compile Include="Classes\ImageExif_Function.cs" />
+    <Compile Include="Classes\ImageExif.cs" />
+    <Compile Include="Classes\ImageExif_Functions.cs" />
     <Compile Include="Classes\ImageExif_Record.cs" />
     <Compile Include="Classes\LoadImageDetail_ProgressModule.cs" />
     <Compile Include="Controls\Display types\DisplayByIcon\Match_Display_Icon.xaml.cs">
       <DependentUpon>Match_Display_Icon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MatchItem_Container.xaml.cs">
-      <DependentUpon>MatchItem_Container.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Display types\DisplayByList\Match_Display_List.xaml.cs">
-      <DependentUpon>Match_Display_List.xaml</DependentUpon>
+    <Compile Include="Pages\MatchedItemPage.xaml.cs">
+      <DependentUpon>MatchedItemPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PhotoTakenTimeSearch.xaml.cs">
       <DependentUpon>PhotoTakenTimeSearch.xaml</DependentUpon>
@@ -159,6 +163,7 @@
     </Compile>
     <Compile Include="Classes\SelectedFolder_Record.cs" />
     <Compile Include="Classes\UniversalFunctions.cs" />
+    <Compile Include="ApplicationVariables.cs" />
     <Resource Include="ApplicationResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -173,11 +178,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Display types\DisplayByList\Match_Display_List.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\DisplayPage_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Display types\DisplayTypeSwitch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DisplayPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -206,11 +219,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\MatchItem_Container.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Display types\DisplayByList\Match_Display_List.xaml">
+    <Page Include="Pages\MatchedItemPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

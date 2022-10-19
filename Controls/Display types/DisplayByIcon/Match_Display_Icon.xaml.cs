@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Google_Drive_Organizer_V3.Classes;
 
 namespace Google_Drive_Organizer_V3.Pages.MatchItem.Display_types
 {
@@ -25,22 +26,22 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem.Display_types
             Initialized += Match_Display_Icon_Initialized;
             InitializeComponent();
         }
-        ImageExif_Class exif = new ImageExif_Class();
+        ImageExif exif = new ImageExif();
         private void Match_Display_Icon_Initialized(object sender, EventArgs e)
         {
             BitmapImage image = new BitmapImage();
             image.BeginInit();
-            image.DecodePixelHeight = 200;
-            image.UriSource = new Uri(exif.Image_Location);
+            image.DecodePixelHeight = 300;
+            image.UriSource = new Uri(exif.ImagePath);
             image.EndInit();
             ImageBrush image_brush = new ImageBrush();
             image_brush.ImageSource = image;
             image_brush.Stretch = Stretch.Uniform;
             DisplayImage.Background = image_brush;
-            ImageFileName.Content = System.IO.Path.GetFileName(exif.Image_Location);
+            ImageFileName.Content = System.IO.Path.GetFileName(exif.ImagePath);
         }
 
-        public Match_Display_Icon(ImageExif_Class exif_input)
+        public Match_Display_Icon(ImageExif exif_input)
         {
             exif = exif_input;
             Initialized += Match_Display_Icon_Initialized;

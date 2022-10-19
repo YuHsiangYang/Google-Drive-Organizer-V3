@@ -1,5 +1,4 @@
-﻿using Google_Drive_Organizer_V3.Pages.MatchItem;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,21 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Google_Drive_Organizer_V3.Classes;
 
-namespace Google_Drive_Organizer_V3.Controls.Display_types.DisplayByList
+namespace Google_Drive_Organizer_V3.Pages
 {
     /// <summary>
-    /// Match_Display_List.xaml 的互動邏輯
+    /// MatchedItemPage.xaml 的互動邏輯
     /// </summary>
-    public partial class Match_Display_List : UserControl
+    public partial class MatchedItemPage : UserControl
     {
-        public Match_Display_List()
+        public MatchedItemPage()
         {
-            //InitializeComponent();
+            InitializeComponent();
         }
-        public Match_Display_List(ImageExif exif_input)
+
+        private void DisplayType_DisplayTypeChanged_Event(object sender, Controls.TypeOfDisplay e)
         {
+
         }
     }
 }

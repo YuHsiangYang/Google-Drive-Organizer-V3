@@ -21,7 +21,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Rectangle x:Name="SelectedDisplayType_Rectangle" Fill="#FFE2E2E2" Grid.ColumnSpan="2" Width="45" Height="45" RadiusX="6.5" RadiusY="6.5" HorizontalAlignment="Stretch" Margin="2,2,53,2"></Rectangle>
-            <svgc:SvgViewbox Source=".\icons\Display types\List item.svg" Grid.Column="0" Height="34" Width="34" Margin="8">
+            <svgc:SvgViewbox Source=".\Controls\Display types\Icons\List item.svg" Grid.Column="0" Height="34" Width="34" Margin="8">
                 <svgc:SvgViewbox.RenderTransformOrigin>
                     <Point>0.5, 0.5</Point>
                 </svgc:SvgViewbox.RenderTransformOrigin>
@@ -29,7 +29,7 @@
                     <ScaleTransform x:Name="ListItem_Scale"></ScaleTransform>
                 </svgc:SvgViewbox.RenderTransform>
             </svgc:SvgViewbox>
-            <svgc:SvgViewbox Source=".\icons\Display types\Image.svg" Grid.Column="1" Height="34" Width="34" Margin="8">
+            <svgc:SvgViewbox Source=".\Controls\Display types\Icons\Image.svg" Grid.Column="1" Height="34" Width="34" Margin="8">
                 <svgc:SvgViewbox.RenderTransformOrigin>
                     <Point>0.5, 0.5</Point>
                 </svgc:SvgViewbox.RenderTransformOrigin>

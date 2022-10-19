@@ -25,10 +25,11 @@
             <RowDefinition Height="43"/>
         </Grid.RowDefinitions>
         <ScrollViewer x:Name="Matched_Item_ScrollViewer" VerticalScrollBarVisibility="Auto" Grid.Row="3" Grid.RowSpan="1" Grid.ColumnSpan="2">
-            <WrapPanel Name="Matched_Item_Stackpanel" theme:ScrollChrome.ScrollGlyph="RightArrow"></WrapPanel>
+            <Controls:DisplayPanel></Controls:DisplayPanel>
             <!--<StackPanel x:Name="Matched_Item_Stackpanel"/>-->
         </ScrollViewer>
         <Grid Grid.Row="2">
+            <StackPanel Name="Matched_Item_Stackpanel" IsEnabled="False" Visibility="Collapsed" Height="0" Width="0"></StackPanel>
             <Controls:DisplayType x:Name="display_type" HorizontalAlignment="Left" VerticalAlignment="Top" DisplayTypeChanged="Display_type_DisplayTypeChanged"/>
         </Grid>
         <Grid x:Name="Search_Bar" VerticalAlignment="Top" Height="41">

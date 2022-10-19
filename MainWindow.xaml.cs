@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,12 +30,14 @@ namespace Google_Drive_Organizer_V3
             History.SelectFolder.Select_Folder_Finish += SelectFolder_Control_Select_Folder_Finish;
         }
 
-        private void SelectFolder_Control_Select_Folder_Finish()
+        private async void SelectFolder_Control_Select_Folder_Finish()
         {
             MainWindow_Grid.Children.Clear();
-            History.MatchedItem = new Pages.MatchItem.MatchItem_Container();
-            History.MatchedItem.NextStepTriggered += MatchedItem_NextStepTriggered;
-            MainWindow_Grid.Children.Add(History.MatchedItem);
+            Progress<LoadEXIFRecord_ProgressReportModule> progress = new Progress<LoadEXIFRecord_ProgressReportModule>();
+            CancellationTokenSource cts = new CancellationTokenSource();
+            History.DisplayMatchPanel = new Controls.DisplayPanel(await MatchItem_Record.LoadMatch(SelectedFolder_Record.Folders, progress, cts.Token));
+            //History.MatchedItem.NextStepTriggered += MatchedItem_NextStepTriggered;
+            MainWindow_Grid.Children.Add(History.DisplayMatchPanel);
         }
 
         private void MatchedItem_NextStepTriggered()

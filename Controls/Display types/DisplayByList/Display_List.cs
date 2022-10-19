@@ -1,53 +1,64 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using Google_Drive_Organizer_V3.Controls.Display_types.DisplayByList;
 using Google_Drive_Organizer_V3.Pages.MatchItem;
 
 namespace Google_Drive_Organizer_V3.Classes.Display_types
 {
-    internal class Display_List : IDisplayInterface
+    public  class Display_List : IDisplayInterface
     {
-        public void ShowPage(int page)
+        public string PanelName { get; } = "DisplayStackPanel";
+
+        public object Panel { get; private set; }
+
+        public void InitializePage(ScrollViewer scrollViewer)
         {
-            List<MatchItem_Child> children = new List<MatchItem_Child>();
+            StackPanel display_panel = new StackPanel()
+            {
+                Name = PanelName,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Stretch,
+            };
+            Panel = display_panel;
+            scrollViewer.Content = Panel;
+        }
+
+        public void ShowPage(int page, List<ImageExif> input)
+        {
+            List<Match_Display_List> children = new List<Match_Display_List>();
             int from = (page - 1) * 30;
             int to = page * 30;
-            for (int i = from; i < to; i++)
+            foreach (ImageExif item in input)
             {
-                try
+                children.Add(new Match_Display_List(item)
                 {
-                    children.Add(new MatchItem_Child(History.MatchedItem.ItemsForDisplay[i])
-                    {
-                        HorizontalAlignment = HorizontalAlignment.Stretch,
-                    });
-
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("items not enough");
-                }
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                });
             }
             //foreach (ImageExif_Class item in ItemsForDisplay)
             //{
             //    children.Add(new MatchItem_Child(item)); 
             //}
-            History.MatchedItem.Matched_Item_Stackpanel.Children.Clear();
+            ((StackPanel)Panel).Children.Clear();
             foreach (var item in children)
             {
-                if (History.MatchedItem.Matched_Item_Stackpanel.Children.IndexOf(item) == -1)
+                if (((StackPanel)Panel).Children.IndexOf(item) == -1)
                 {
-                    History.MatchedItem.Matched_Item_Stackpanel.Children.Add(item);
+                    ((StackPanel)Panel).Children.Add(item);
                     UniversalFunctions.Appear_Element(item, new Duration(TimeSpan.FromSeconds(0.15)));
                 }
             }
-            if (History.MatchedItem.ItemsForDisplay.Count == 0)
-            {
-                History.MatchedItem.NoItemFounded();
-            }
-            History.MatchedItem.Pages.LoadRange(History.MatchedItem.ItemsForDisplay.Count);
+            //if (input.Count == 0)
+            //{
+            //    NoItemFounded();
+            //}
+            //History.MatchedItem.Pages.LoadRange(History.MatchedItem.ItemsForDisplay.Count);
         }
     }
 }

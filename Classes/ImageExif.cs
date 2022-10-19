@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace Google_Drive_Organizer_V3.Pages.MatchItem
+namespace Google_Drive_Organizer_V3.Classes
 {
-    public class ImageExif_Class
+    public class ImageExif
     {
-        private string NoData = Properties.Settings.Default["No_Data_Message"].ToString();
-        public DateTime phototakentime_DateTime { get; set; }
+        private string NoData = ApplicationVariables.NoData;
+        public DateTime phototakentime_DateTime { get; set; } = new DateTime();
         public Dictionary<string, int> Photo_TakenTime_Dictionary { get; set; } = new Dictionary<string, int>();
-        private string PhotoTakemTime { get; set; }
+        private string PhotoTakemTime { get; set; } = "";
         public string phototakentime
         {
             get
@@ -31,14 +31,14 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem
                 }
             }
         }
-        public string CameraManufactor { get; set; }
-        public string Image_Location { get; set; }
+        public string CameraManufactor { get; set; } = "";
+        public string ImagePath { get; set; } = "";
 
-        public string GPS_Longitude { get; set; }
-        public string GPS_Latitude { get; set; }
-        public string GPS_Altitude { get; set; }
+        public string GPS_Longitude { get; set; } = "";
+        public string GPS_Latitude { get; set; } = "";
+        public string GPS_Altitude { get; set; } = "";
 
-        private string json_phototakentime { get; set; }
+        private string json_phototakentime { get; set; } = "";
         public string Json_PhotoTakenTime
         {
             get
@@ -56,11 +56,11 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem
                 json_phototakentime = pre.ToString();
             }
         }
-        public DateTime Json_PhotoTakenTime_DateTime { get; set; }
-        public string Json_GPS_Longitude { get; set; }
-        public string Json_GPS_Latitude { get; set; }
-        public string Json_GPS_Altitude { get; set; }
-        public string Json_Location { get; set; }
-        public string MD5 { get; set; }
+        public DateTime Json_PhotoTakenTime_DateTime { get; set; } = new DateTime();
+        public string Json_GPS_Longitude { get; set; } = "";
+        public string Json_GPS_Latitude { get; set; } = "";
+        public string Json_GPS_Altitude { get; set; } = "";
+        public string Json_Location { get; set; } = "";
+        public string MD5 { get; set; } = "";
     }
 }

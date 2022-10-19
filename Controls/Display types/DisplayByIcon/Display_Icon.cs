@@ -3,22 +3,36 @@ using Google_Drive_Organizer_V3.Pages.MatchItem.Display_types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace Google_Drive_Organizer_V3.Classes.Display_types
 {
-    class Display_Icon : IDisplayInterface
+    public class Display_Icon : IDisplayInterface
     {
-        public void ShowPage(int page)
+        public string PanelName { get; } = "DisplayPanel";
+        public object Panel { get; private set;}
+
+        public void InitializePage(ScrollViewer scrollViewer)
         {
-            foreach (ImageExif_Class item in History.MatchedItem.ItemsForDisplay)
+            WrapPanel DisplayWrapPanel = new WrapPanel()
             {
-                History.MatchedItem.Matched_Item_Stackpanel.Children.Add(new Match_Display_Icon(item)
-                {
-                    Height = 130,
-                    Width = 120,
-                });
+                Name = PanelName,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch,
+                VerticalAlignment = System.Windows.VerticalAlignment.Stretch,
+            };
+            Panel = DisplayWrapPanel;
+            scrollViewer.Content = Panel;
+        }
+
+        public void ShowPage(int page, List<ImageExif> input_items)
+        {
+            List<ImageExif> selected_range = input_items.GetRange(page * ApplicationVariables.PageSize, ApplicationVariables.PageSize);
+            foreach (ImageExif children_item in selected_range)
+            {
+                ((WrapPanel)Panel).Children.Add(new Match_Display_Icon(children_item));
             }
         }
     }
