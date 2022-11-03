@@ -26,19 +26,35 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem.Display_types
             Initialized += Match_Display_Icon_Initialized;
             InitializeComponent();
         }
-        ImageExif exif = new ImageExif();
+        public ImageExif exif = new ImageExif();
         private void Match_Display_Icon_Initialized(object sender, EventArgs e)
         {
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.DecodePixelHeight = 300;
-            image.UriSource = new Uri(exif.ImagePath);
-            image.EndInit();
-            ImageBrush image_brush = new ImageBrush();
-            image_brush.ImageSource = image;
-            image_brush.Stretch = Stretch.Uniform;
-            DisplayImage.Background = image_brush;
-            ImageFileName.Content = System.IO.Path.GetFileName(exif.ImagePath);
+            try
+            {
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.DecodePixelHeight = 300;
+                image.UriSource = new Uri(exif.ImagePath);
+                image.EndInit();
+                ImageBrush image_brush = new ImageBrush();
+                image_brush.ImageSource = image;
+                image_brush.Stretch = Stretch.Uniform;
+                DisplayImage.Background = image_brush;
+                ImageFileName.Content = System.IO.Path.GetFileName(exif.ImagePath);
+            }
+            catch (Exception)
+            {
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.DecodePixelHeight = 300;
+                image.UriSource = new Uri(@"..\..\..\icons\Empty Image.png", UriKind.Relative);
+                image.EndInit();
+                ImageBrush image_brush = new ImageBrush();
+                image_brush.ImageSource = image;
+                image_brush.Stretch = Stretch.Uniform;
+                DisplayImage.Background = image_brush;
+                ImageFileName.Content = "錯誤";
+            }
         }
 
         public Match_Display_Icon(ImageExif exif_input)
@@ -46,6 +62,11 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem.Display_types
             exif = exif_input;
             Initialized += Match_Display_Icon_Initialized;
             InitializeComponent();
+        }
+
+        private void ClickTrigger_Click(object sender, RoutedEventArgs e)
+        {
+            History.DisplayMatchPanel.EXIFViewer.DisplayImage(this, exif);
         }
     }
 }

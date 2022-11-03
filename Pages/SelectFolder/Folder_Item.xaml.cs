@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
-using static Google_Drive_Organizer_V3.UniversalFunctions;
+using static Google_Drive_Organizer_V3.GlobalScripts;
 using System.Windows.Media.Animation;
 
 namespace Google_Drive_Organizer_V3.Pages.SelectFolder

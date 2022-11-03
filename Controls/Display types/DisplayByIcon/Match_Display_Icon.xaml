@@ -5,15 +5,42 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Google_Drive_Organizer_V3.Pages.MatchItem.Display_types"
              mc:Ignorable="d" 
-             d:DesignHeight="130" d:DesignWidth="120">
+             d:DesignHeight="100" d:DesignWidth="90" Height="100" Width="90" Margin="5" Name="UserControlMainGrid">
+    <UserControl.Resources>
+        <Color x:Key="OriginalBackgroundColor">#f8f9fa</Color>
+        <Color x:Key="MouseEnterColor">#fca311</Color>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Canvas Grid.Row="0" x:Name="DisplayImage"></Canvas>
+        <Border Grid.RowSpan="2" CornerRadius="7">
+            <Border.Background>
+                <SolidColorBrush x:Name="Background" Color="{StaticResource OriginalBackgroundColor}"></SolidColorBrush>
+            </Border.Background>
+        </Border>
+        <Canvas Grid.Row="0" x:Name="DisplayImage" Margin="5"></Canvas>
         <Viewbox Grid.Row="1" >
-            <Label Name="ImageFileName" Content="Label"></Label>
+            <Label Name="ImageFileName" Content="Image name"></Label>
         </Viewbox>
+        <Grid Name="MouseTriggerArea" Grid.RowSpan="2" Cursor="Hand" Background="#05000000" MouseUp="ClickTrigger_Click">
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard Storyboard.TargetName="Background" Storyboard.TargetProperty="Color">
+                            <ColorAnimation From="{StaticResource OriginalBackgroundColor}" To="{StaticResource MouseEnterColor}"  Duration="0:0:0.2"></ColorAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard Storyboard.TargetName="Background" Storyboard.TargetProperty="Color">
+                            <ColorAnimation From="{StaticResource MouseEnterColor}" To="{StaticResource OriginalBackgroundColor}" Duration="0:0:0.2"></ColorAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Grid.Triggers>
+        </Grid>
     </Grid>
 </UserControl>

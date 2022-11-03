@@ -18,9 +18,9 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem
     /// <summary>
     /// Search_Date_UserControl.xaml 的互動邏輯
     /// </summary>
-    public partial class Search_Date_UserControl : UserControl
+    public partial class Search_By_PhotoTakenTime : UserControl
     {
-        public Search_Date_UserControl()
+        public Search_By_PhotoTakenTime()
         {
             InitializeComponent();
         }

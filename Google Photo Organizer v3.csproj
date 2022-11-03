@@ -112,7 +112,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Classes\ButtonCustomProperties.cs" />
+    <Compile Include="Classes\ButtonCustomProperties.cs">
+      <CustomToolNamespace>Google_Drive_Organizer_V3</CustomToolNamespace>
+    </Compile>
     <Compile Include="Controls\Display types\DisplayByIcon\Display_Icon.cs" />
     <Compile Include="Controls\Display types\DisplayByList\Display_List.cs" />
     <Compile Include="Controls\Display types\DisplayByList\Match_Display_List.xaml.cs">
@@ -125,11 +127,20 @@
     <Compile Include="Controls\CircleSwitch.xaml.cs">
       <DependentUpon>CircleSwitch.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DisplayPage_Control.xaml.cs">
-      <DependentUpon>DisplayPage_Control.xaml</DependentUpon>
+    <Compile Include="Controls\DisplayPages_Control.xaml.cs">
+      <DependentUpon>DisplayPages_Control.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Display types\DisplayTypeSwitch.xaml.cs">
       <DependentUpon>DisplayTypeSwitch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EXIFDataViewer.xaml.cs">
+      <DependentUpon>EXIFDataViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SearchControl.xaml.cs">
+      <DependentUpon>SearchControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Search_By_PhotoTakenTime.xaml.cs">
+      <DependentUpon>Search_By_PhotoTakenTime.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\DisplayPanel.xaml.cs">
       <DependentUpon>DisplayPanel.xaml</DependentUpon>
@@ -137,8 +148,8 @@
     <Compile Include="Controls\DragSelectControl.xaml.cs">
       <DependentUpon>DragSelectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FileNameSearch.xaml.cs">
-      <DependentUpon>FileNameSearch.xaml</DependentUpon>
+    <Compile Include="Controls\Search_By_FileName.xaml.cs">
+      <DependentUpon>Search_By_FileName.xaml</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Classes\History.cs" />
@@ -155,21 +166,20 @@
     <Compile Include="Pages\MatchedItemPage.xaml.cs">
       <DependentUpon>MatchedItemPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\PhotoTakenTimeSearch.xaml.cs">
-      <DependentUpon>PhotoTakenTimeSearch.xaml</DependentUpon>
+    <Compile Include="Controls\Search_By_PhotoTakenTime_Old.xaml.cs">
+      <DependentUpon>Search_By_PhotoTakenTime_Old.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SelectDistination\SelectOutputDestination.xaml.cs">
       <DependentUpon>SelectOutputDestination.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\SelectedFolder_Record.cs" />
-    <Compile Include="Classes\UniversalFunctions.cs" />
+    <Compile Include="Scripts\GlobalScripts.cs" />
     <Compile Include="ApplicationVariables.cs" />
-    <Resource Include="ApplicationResources.xaml">
+    <Compile Include="Settings.cs" />
+    <Content Include="ApplicationResources.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <CustomToolNamespace>Google_Drive_Organizer_V3</CustomToolNamespace>
-    </Resource>
+    </Content>
     <Page Include="Controls\Cannot_Find_Search_Result.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -182,11 +192,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\DisplayPage_Control.xaml">
+    <Page Include="Controls\DisplayPages_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Display types\DisplayTypeSwitch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EXIFDataViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SearchControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Search_By_PhotoTakenTime.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -198,7 +220,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\FileNameSearch.xaml">
+    <Page Include="Controls\Search_By_FileName.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -223,7 +245,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\PhotoTakenTimeSearch.xaml">
+    <Page Include="Controls\Search_By_PhotoTakenTime_Old.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -275,7 +297,7 @@
     <None Include="icons\Search\searching.ai" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
@@ -304,6 +326,7 @@
     <Content Include="icons\Drag\folder.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="icons\Empty Image.png" />
     <Content Include="icons\Json_Icon.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

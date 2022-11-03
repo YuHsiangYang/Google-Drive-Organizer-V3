@@ -14,7 +14,7 @@ namespace Google_Drive_Organizer_V3.Classes
     {
         static ProcessStartInfo start_info = new ProcessStartInfo
         {
-            FileName = System.IO.Path.GetFullPath(@"C:\Users\yuhsi\Home\Drive\Yu-Hsiang Folder\Self written Application\Google Drive Organizer V3\Scripts\Read_EXIF.exe"),
+            FileName = Path.GetFullPath(@".\Scripts\Read_EXIF.exe"),
             UseShellExecute = false,
             RedirectStandardError = true,
             RedirectStandardOutput = true,
@@ -29,11 +29,11 @@ namespace Google_Drive_Organizer_V3.Classes
             {
                 await Task.Run(async () =>
                     {
-                        //if (cancellationToken.IsCancellationRequested)
-                        //{
-                        //    detail = new ImageExif();
-                        //    cancellationToken.ThrowIfCancellationRequested();
-                        //}
+                        if (cancellationToken.IsCancellationRequested)
+                        {
+                            detail = new ImageExif();
+                            cancellationToken.ThrowIfCancellationRequested();
+                        }
                         start_info.Arguments = string.Format("\"{0}\" \"{1}\"", input_item.Image_Location, ApplicationVariables.NoData);
                         using (Process process = Process.Start(start_info))
                         {
@@ -50,14 +50,13 @@ namespace Google_Drive_Organizer_V3.Classes
                                 //detail.MD5 = UniversalFunctions.CalculateMD5(MD5Type.File, image_location);
                             }
                         }
-                        Console.WriteLine(input_item.Json_Location);
                         string json_text = await Task.Run(() => File.ReadAllText(input_item.Json_Location));
                         JObject json = await Task.Run(() => JObject.Parse(json_text));
                         detail.Json_GPS_Longitude = json["geoDataExif"]["longitude"].ToString();
                         detail.Json_GPS_Latitude = json["geoDataExif"]["latitude"].ToString();
                         detail.Json_GPS_Altitude = json["geoDataExif"]["altitude"].ToString();
                         detail.Json_PhotoTakenTime = json["photoTakenTime"]["timestamp"].ToString();
-                        detail.Json_Location = input_item.Json_Location;
+                        detail.JsonPath = input_item.Json_Location;
                     });
             }
             catch (OperationCanceledException)
@@ -66,46 +65,22 @@ namespace Google_Drive_Organizer_V3.Classes
             }
             return detail;
         }
-        
+
         public static async Task<List<ImageExif>> Load_Image_EXIF_Record(List<MatchItem_Class> matches_input, CancellationToken ct, IProgress<LoadEXIFRecord_ProgressReportModule> progress)
         {
-
             List<ImageExif> ImageExif = new List<ImageExif>();
-            //Action<object> get_exif_individual = async delegate (object input)
-            //{
-            //    var exif = await Load_Image_EXIF_Async(input as MatchItem_Class, ct);
-            //    ImageExif.Add(exif);
-            //    LoadEXIFRecord_ProgressReportModule progression = new LoadEXIFRecord_ProgressReportModule()
-            //    {
-            //        TotalItems = matches_input.Count(),
-            //        CurrentItem = ImageExif.Count(),
-            //        EXIFData = exif
-            //    };
-            //    progress.Report(progression);
-            //};
-            //await Task.Run(() => Parallel.ForEach(matches_input, item => get_exif_individual(item)));
             foreach (MatchItem_Class item in matches_input)
             {
-                ImageExif.Add(await Load_Image_EXIF_Async(item, ct));
+                ImageExif exif = await Load_Image_EXIF_Async(item, ct);
+                ImageExif.Add(exif);
+                LoadEXIFRecord_ProgressReportModule CurrentProgress = new LoadEXIFRecord_ProgressReportModule()
+                {
+                    CurrentItem = ImageExif.Count,
+                    EXIFData = exif,
+                    TotalItems = matches_input.Count - 1,
+                };
+                progress.Report(CurrentProgress);
             }
-            //foreach (MatchItem_Class item in MatchItem_Record.Matched_Items)
-            //{
-
-            //    ImageExif.Add(await Load_Image_EXIF_Async(item, ct));
-            //    LoadEXIFRecord_ProgressReportModule progression = new LoadEXIFRecord_ProgressReportModule()
-            //    {
-            //        TotalItems = MatchItem_Record.Matched_Items.Count(),
-            //        CurrentItem = MatchItem_Record.Matched_Items.ToList().IndexOf(item),
-            //    };
-            //    progress.Report(progression);
-            //}
-            //var result = await Task.WhenAll(GetEXIF);
-
-
-            //foreach (ImageExif item in ImageExif)
-            //{
-            //    ImageExif_Record.Images.Add(item);
-            //}
             return ImageExif;
         }
         public static async Task<List<ImageExif>> SortResult(List<ImageExif> inputs, SortManner sortManner, SortType sortType)
@@ -135,9 +110,9 @@ namespace Google_Drive_Organizer_V3.Classes
         }
         private static int SortByDate(ImageExif x, ImageExif y)
         {
-            if (x.Json_PhotoTakenTime_DateTime == null)
+            if (x.PhotoTakenTime_DateTime_Json == null)
             {
-                if (y.Json_PhotoTakenTime_DateTime == null)
+                if (y.PhotoTakenTime_DateTime_Json == null)
                 {
                     return 0;
                 }
@@ -148,13 +123,13 @@ namespace Google_Drive_Organizer_V3.Classes
             }
             else
             {
-                if (y.Json_PhotoTakenTime_DateTime == null)
+                if (y.PhotoTakenTime_DateTime_Json == null)
                 {
                     return -1;
                 }
                 else
                 {
-                    return x.Json_PhotoTakenTime_DateTime.CompareTo(y.Json_PhotoTakenTime_DateTime);
+                    return x.PhotoTakenTime_DateTime_Json.CompareTo(y.PhotoTakenTime_DateTime_Json);
                 }
             }
         }
@@ -171,6 +146,38 @@ namespace Google_Drive_Organizer_V3.Classes
             }
             return retval;
         }
+        public static List<ImageExif> SearchByPhotoTakenTime(List<ImageExif> imageExifs, Dictionary<DateTypes, int> searchDate)
+        {
+            IEnumerable<ImageExif> exif_query = imageExifs;
+            if (searchDate[DateTypes.Year] != 0)
+            {
+                exif_query = exif_query.Where(item => item.PhotoTakenTime_DateTime_Json.Year == searchDate[DateTypes.Year]);
+            }
+            if (searchDate[DateTypes.Month] != 0)
+            {
+                exif_query = exif_query.Where(item => item.PhotoTakenTime_DateTime_Json.Month == searchDate[DateTypes.Month]);
+            }
+            if (searchDate[DateTypes.Day] != 0)
+            {
+                exif_query = exif_query.Where(item => item.PhotoTakenTime_DateTime_Json.Day == searchDate[DateTypes.Day]);
+            }
+            return exif_query.ToList();
+        }
+        public static List<ImageExif> SearchByFileName(List<ImageExif> imageExifs, string filename)
+        {
+            IEnumerable<ImageExif> query = imageExifs;
+            if (filename != "")
+            {
+                query = query.Where(item => item.ImagePath.Contains(filename));
+            }
+            return query.ToList();
+        }
+    }
+    public enum DateTypes
+    {
+        Year,
+        Month,
+        Day,
     }
     public enum SortType
     {

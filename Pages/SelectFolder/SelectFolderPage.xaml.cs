@@ -100,13 +100,13 @@ namespace Google_Drive_Organizer_V3.Pages
             //storyboard.Children.Add(animation);
             //storyboard.Duration = new Duration(TimeSpan.FromSeconds(.2));
             //storyboard.Begin();
-            UniversalFunctions.Disappear_Element(stackPanel, TimeSpan.FromSeconds(.2));
+            GlobalScripts.Disappear_Element(stackPanel, TimeSpan.FromSeconds(.2));
             stackPanel.Visibility = Visibility.Hidden;
             await Task.Delay(TimeSpan.FromSeconds(.1));
             dragEnterIcon.Name = "DragEnterIcon";
             Drop_Area_Grid.Children.Insert(1, dragEnterIcon);
             Grid.SetColumn(dragEnterIcon, 1);
-            UniversalFunctions.Appear_Element(dragEnterIcon, TimeSpan.FromSeconds(.15));
+            GlobalScripts.Appear_Element(dragEnterIcon, TimeSpan.FromSeconds(.15));
         }
         Controls.DragEnterIcon_With_Animation dragEnterIcon = new Controls.DragEnterIcon_With_Animation()
         {
@@ -115,11 +115,11 @@ namespace Google_Drive_Organizer_V3.Pages
 
         private async void DragTrigger_Grid_DragLeave(object sender, DragEventArgs e)
         {
-            UniversalFunctions.Disappear_Element(dragEnterIcon, TimeSpan.FromSeconds(.2));
+            GlobalScripts.Disappear_Element(dragEnterIcon, TimeSpan.FromSeconds(.2));
             await Task.Delay(TimeSpan.FromSeconds(.1));
             Drop_Area_Grid.Children.Remove(dragEnterIcon);
             stackPanel.Visibility = Visibility.Visible;
-            UniversalFunctions.Appear_Element(stackPanel, TimeSpan.FromSeconds(.2));
+            GlobalScripts.Appear_Element(stackPanel, TimeSpan.FromSeconds(.2));
         }
 
         private void DragTrigger_Grid_Drop(object sender, DragEventArgs e)

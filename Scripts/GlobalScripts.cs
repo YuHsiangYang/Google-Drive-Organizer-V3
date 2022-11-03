@@ -13,7 +13,7 @@ using System.IO;
 
 namespace Google_Drive_Organizer_V3
 {
-    public static class UniversalFunctions
+    public static class GlobalScripts
     {
         public static void Disappear_Element(UIElement uIElement, Duration animation_duration)
         {

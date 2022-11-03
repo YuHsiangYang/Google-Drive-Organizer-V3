@@ -10,7 +10,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="\ApplicationResources.xaml"/>
+                <!--<ResourceDictionary Source="..\ApplicationResources.xaml"/>-->
                 <ResourceDictionary>
                     <Button Grid.Column="2" Content="清除搜尋" x:Key="Clear" Name="Clear" Width="70" extension:ButtonCustomProperties.CornerRadius="7" BorderBrush="transparent" Background="#ffff9f9f"></Button>
                 </ResourceDictionary>

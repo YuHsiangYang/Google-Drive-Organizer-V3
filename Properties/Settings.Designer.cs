@@ -13,7 +13,7 @@ namespace Google_Drive_Organizer_V3.Properties {
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.3.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
         
@@ -23,21 +23,27 @@ namespace Google_Drive_Organizer_V3.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int page_number {
+        [global::System.Configuration.DefaultSettingValueAttribute("175")]
+        public double EXIF_Height {
             get {
-                return ((int)(this["page_number"]));
+                return ((double)(this["EXIF_Height"]));
+            }
+            set {
+                this["EXIF_Height"] = value;
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("30")]
-        public int Page_Size {
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        public double EXIF_Width {
             get {
-                return ((int)(this["Page_Size"]));
+                return ((double)(this["EXIF_Width"]));
+            }
+            set {
+                this["EXIF_Width"] = value;
             }
         }
     }

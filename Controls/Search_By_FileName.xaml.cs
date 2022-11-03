@@ -23,7 +23,7 @@ namespace Google_Drive_Organizer_V3.Controls
     public partial class Search_By_FileName : UserControl
     {
         public CancellationTokenSource CancellationToken { get; set; } = new CancellationTokenSource();
-        public event Action<string> SearchFileName;
+        public event EventHandler<string> SearchFileName;
         public Search_By_FileName()
         {
             InitializeComponent();
@@ -40,10 +40,10 @@ namespace Google_Drive_Organizer_V3.Controls
         //    Source = new Uri(@"./ApplicationResources.xaml", UriKind.Relative)
         //};
 
-        private async void Search_Click(object sender, RoutedEventArgs e)
+        private void Search_Click(object sender, RoutedEventArgs e)
         {
             //List<Pages.MatchItem.MatchItem_Child> matched = 
-            SearchFileName(Input.Text);
+            SearchFileName?.Invoke(this, Input.Text);
         }
 
         private void ClearSearch_Click(object sender, RoutedEventArgs e)
@@ -71,15 +71,15 @@ namespace Google_Drive_Organizer_V3.Controls
                 if (Input.Text.Length > 0)
                 {
                     ClearSearch_PlaceHolder.Children.Add(ClearSearch);
-                    UniversalFunctions.Appear_Element(ClearSearch, duration);
+                    GlobalScripts.Appear_Element(ClearSearch, duration);
                     ClearSearch_PlaceHolder.UpdateLayout();
                     DoubleAnimation clearsearch_grid_animation = new DoubleAnimation(0, ClearSearch.Width, duration);
                     ClearSearch_PlaceHolder.BeginAnimation(WidthProperty, clearsearch_grid_animation);
                 }
                 else
                 {
-                    SearchFileName(Input.Text);
-                    UniversalFunctions.Disappear_Element(ClearSearch, duration);
+                    SearchFileName(this, Input.Text);
+                    GlobalScripts.Disappear_Element(ClearSearch, duration);
                     DoubleAnimation clearsearch_grid_animation = new DoubleAnimation(ClearSearch.Width, 0, duration);
                     ClearSearch_PlaceHolder.BeginAnimation(WidthProperty, clearsearch_grid_animation);
                     await Task.Delay(duration);
@@ -99,7 +99,7 @@ namespace Google_Drive_Organizer_V3.Controls
         {
             if(e.Key == Key.Enter && Input.Text.Length != 0)
             {
-                SearchFileName(Input.Text);
+                SearchFileName(this, Input.Text);
             }
         }
     }

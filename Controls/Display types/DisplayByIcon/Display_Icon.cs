@@ -13,7 +13,7 @@ namespace Google_Drive_Organizer_V3.Classes.Display_types
     public class Display_Icon : IDisplayInterface
     {
         public string PanelName { get; } = "DisplayPanel";
-        public object Panel { get; private set;}
+        public object Panel { get; private set; }
 
         public void InitializePage(ScrollViewer scrollViewer)
         {
@@ -29,7 +29,16 @@ namespace Google_Drive_Organizer_V3.Classes.Display_types
 
         public void ShowPage(int page, List<ImageExif> input_items)
         {
-            List<ImageExif> selected_range = input_items.GetRange(page * ApplicationVariables.PageSize, ApplicationVariables.PageSize);
+            ((WrapPanel)Panel).Children.Clear();
+            List<ImageExif> selected_range = new List<ImageExif>();
+            try
+            {
+                selected_range = input_items.GetRange(page * ApplicationVariables.PageSize, (page + 1) * ApplicationVariables.PageSize);
+            }
+            catch (ArgumentException)
+            {
+                selected_range = input_items.GetRange(page * ApplicationVariables.PageSize, input_items.Count - page * ApplicationVariables.PageSize);
+            }
             foreach (ImageExif children_item in selected_range)
             {
                 ((WrapPanel)Panel).Children.Add(new Match_Display_Icon(children_item));
