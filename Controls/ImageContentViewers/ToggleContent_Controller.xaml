@@ -1,0 +1,28 @@
+﻿<UserControl x:Name="MainControl" x:Class="Google_Drive_Organizer_V3.Controls.ImageContentViewers.ToggleContent_Controller"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Google_Drive_Organizer_V3.Controls.ImageContentViewers"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="110">
+    <Viewbox Margin="0">
+        <Grid>
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Rectangle Name="ContentSelection_Rectangle" RadiusX="5" RadiusY="5" Fill="#FFECECEC" Grid.ColumnSpan="2" Width="50" HorizontalAlignment="Left" Margin="0,0,0,0"></Rectangle>
+                <Viewbox Grid.Column="0" Width="50" Height="20">
+                    <Label Content="Json 資料" FontSize="9" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Name="JsonLabel" FontWeight="Bold"/>
+                </Viewbox>
+                <Viewbox Grid.Column="1" Width="50" Height="20">
+                    <Label Content="EXIF 資料" FontSize="9" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Name="EXIFLabel"/>
+                </Viewbox>
+                <Rectangle Name="Json" Grid.Column="0" Fill="#0000" MouseLeftButtonUp="ContentToggled" Cursor="Hand"/>
+                <Rectangle Name="EXIF" Grid.Column="1" Fill="#0000" MouseLeftButtonUp="ContentToggled" Cursor="Hand"/>
+            </Grid>
+        </Grid>
+    </Viewbox>
+</UserControl>

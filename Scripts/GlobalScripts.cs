@@ -10,33 +10,86 @@ using System.Windows.Controls;
 using Google_Drive_Organizer_V3.Pages.MatchItem;
 using System.Security.Cryptography;
 using System.IO;
+using SharpVectors.Scripting;
 
 namespace Google_Drive_Organizer_V3
 {
     public static class GlobalScripts
     {
+        private static double scale_ratio = .75;
         public static void Disappear_Element(UIElement uIElement, Duration animation_duration)
         {
-            DoubleAnimation disappear_scale = new DoubleAnimation(1, 0.5, animation_duration);
+            DoubleAnimation disappear_scale = new DoubleAnimation(1, scale_ratio, animation_duration);
             DoubleAnimation disappear_opacity = new DoubleAnimation(1, 0, animation_duration);
             ScaleTransform transform = new ScaleTransform();
             uIElement.RenderTransform = transform;
             uIElement.RenderTransformOrigin = new Point(0.5, 0.5);
             transform.BeginAnimation(ScaleTransform.ScaleXProperty, disappear_scale);
             transform.BeginAnimation(ScaleTransform.ScaleYProperty, disappear_scale);
-            uIElement.BeginAnimation(System.Windows.Controls.UserControl.OpacityProperty, disappear_opacity);
+            uIElement.BeginAnimation(UIElement.OpacityProperty, disappear_opacity);
         }
         public static void Appear_Element(UIElement uIElement, Duration animation_duration)
         {
-            DoubleAnimation appear_scale = new DoubleAnimation(.5, 1, animation_duration);
+            DoubleAnimation appear_scale = new DoubleAnimation(scale_ratio, 1, animation_duration);
             DoubleAnimation appear_opacity = new DoubleAnimation(0, 1, animation_duration);
             ScaleTransform transform = new ScaleTransform();
             uIElement.RenderTransform = transform;
             uIElement.RenderTransformOrigin = new Point(0.5, 0.5);
             transform.BeginAnimation(ScaleTransform.ScaleXProperty, appear_scale);
             transform.BeginAnimation(ScaleTransform.ScaleYProperty, appear_scale);
-            uIElement.BeginAnimation(System.Windows.Controls.UserControl.OpacityProperty, appear_opacity);
-            //transform.BeginAnimation(ScaleTransform.CenterYProperty, appear_scale);
+            uIElement.BeginAnimation(UIElement.OpacityProperty, appear_opacity);
+        }
+
+        private static async void SwipeGeneric(UIElement uIElement, Duration duration, SwipeDirection direction, bool to_origin)
+        {
+            double displacement = 20;
+            displacement = direction == SwipeDirection.LeftToRight ? displacement : -displacement;
+            DoubleAnimation displacement_animation = new DoubleAnimation(displacement, duration);
+            if (to_origin)
+            {
+                displacement_animation.From = displacement;
+                displacement_animation.To = 0;
+            }
+
+
+
+
+            TranslateTransform translateTransform = new TranslateTransform();
+            uIElement.RenderTransform = translateTransform;
+            translateTransform.BeginAnimation(TranslateTransform.XProperty, displacement_animation);
+            //await Task.Delay(duration.TimeSpan - TimeSpan.FromMilliseconds(10));
+            //uIElement.RenderTransform = new TranslateTransform();
+        }
+        public static void SwipeTransition(UIElement uIElement, Duration duration, SwipeDirection direction, TransitionType transitionType)
+        {
+            DoubleAnimation opacity_animation = new DoubleAnimation();
+
+            switch (transitionType)
+            {
+                case TransitionType.Appear:
+                    SwipeGeneric(uIElement, duration, direction, true);
+                    opacity_animation = new DoubleAnimation(0, 1, duration);
+                    break;
+                case TransitionType.Disappear:
+                    SwipeGeneric(uIElement, duration, direction, false);
+                    opacity_animation = new DoubleAnimation(1, 0, duration);
+                    break;
+                default:
+                    break;
+            }
+            //Set up the opacity animation
+            uIElement.BeginAnimation(UIElement.OpacityProperty, opacity_animation);
+        }
+        public enum SwipeDirection
+        {
+            LeftToRight,
+            RightToLeft
+        }
+
+        public enum TransitionType
+        {
+            Appear,
+            Disappear
         }
         public static string CalculateMD5(MD5Type Type, string InputValue)
         {
@@ -100,7 +153,7 @@ namespace Google_Drive_Organizer_V3
             }
             return count;
         }
-        
+
     }
     [Flags]
     public enum MD5Type

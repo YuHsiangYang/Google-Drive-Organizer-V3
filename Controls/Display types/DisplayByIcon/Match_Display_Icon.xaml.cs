@@ -34,13 +34,13 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem.Display_types
                 BitmapImage image = new BitmapImage();
                 image.BeginInit();
                 image.DecodePixelHeight = 300;
-                image.UriSource = new Uri(exif.ImagePath);
+                image.UriSource = new Uri(exif.EXIFData.ImagePath);
                 image.EndInit();
                 ImageBrush image_brush = new ImageBrush();
                 image_brush.ImageSource = image;
                 image_brush.Stretch = Stretch.Uniform;
                 DisplayImage.Background = image_brush;
-                ImageFileName.Content = System.IO.Path.GetFileName(exif.ImagePath);
+                ImageFileName.Content = System.IO.Path.GetFileName(exif.EXIFData.ImagePath);
             }
             catch (Exception)
             {

@@ -30,7 +30,7 @@
                 </ScrollViewer>
             </Grid>
             <Grid x:Name="EXIFDataGrid" Grid.Column="1">
-                <local:EXIFDataViewer x:Name="EXIFViewer"></local:EXIFDataViewer>
+                <local:ImageDataViewer x:Name="EXIFViewer"/>
             </Grid>
             <GridSplitter x:Name="EXIFWidthSplitter" Grid.Column="1" Width="5" HorizontalAlignment="Left" DragCompleted="EXIFWidthSplitter_DragCompleted"/>
         </Grid>

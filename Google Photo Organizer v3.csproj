@@ -115,6 +115,7 @@
     <Compile Include="Classes\ButtonCustomProperties.cs">
       <CustomToolNamespace>Google_Drive_Organizer_V3</CustomToolNamespace>
     </Compile>
+    <Compile Include="Classes\ImageInformation\JSON_Data\ImageJsonData.cs" />
     <Compile Include="Controls\Display types\DisplayByIcon\Display_Icon.cs" />
     <Compile Include="Controls\Display types\DisplayByList\Display_List.cs" />
     <Compile Include="Controls\Display types\DisplayByList\Match_Display_List.xaml.cs">
@@ -133,8 +134,17 @@
     <Compile Include="Controls\Display types\DisplayTypeSwitch.xaml.cs">
       <DependentUpon>DisplayTypeSwitch.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\EXIFDataViewer.xaml.cs">
-      <DependentUpon>EXIFDataViewer.xaml</DependentUpon>
+    <Compile Include="Controls\ImageContentViewers\ImageDataViewer.xaml.cs">
+      <DependentUpon>ImageDataViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ImageContentViewers\Exif_ContentViewer.xaml.cs">
+      <DependentUpon>Exif_ContentViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ImageContentViewers\Json_ContentViewer.xaml.cs">
+      <DependentUpon>Json_ContentViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ImageContentViewers\ToggleContent_Controller.xaml.cs">
+      <DependentUpon>ToggleContent_Controller.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SearchControl.xaml.cs">
       <DependentUpon>SearchControl.xaml</DependentUpon>
@@ -156,15 +166,11 @@
     <Compile Include="Classes\LoadEXIFRecord_ProgressReportModule.cs" />
     <Compile Include="Classes\MatchItem_Record.cs" />
     <Compile Include="Classes\MatchingProgress_Report.cs" />
-    <Compile Include="Classes\ImageExif.cs" />
-    <Compile Include="Classes\ImageExif_Functions.cs" />
-    <Compile Include="Classes\ImageExif_Record.cs" />
+    <Compile Include="Classes\ImageInformation\ImageEXIF\ImageExif.cs" />
+    <Compile Include="Classes\ImageInformation\ImageInfo_Functions.cs" />
     <Compile Include="Classes\LoadImageDetail_ProgressModule.cs" />
     <Compile Include="Controls\Display types\DisplayByIcon\Match_Display_Icon.xaml.cs">
       <DependentUpon>Match_Display_Icon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\MatchedItemPage.xaml.cs">
-      <DependentUpon>MatchedItemPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Search_By_PhotoTakenTime_Old.xaml.cs">
       <DependentUpon>Search_By_PhotoTakenTime_Old.xaml</DependentUpon>
@@ -200,7 +206,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\EXIFDataViewer.xaml">
+    <Page Include="Controls\ImageContentViewers\ImageDataViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ImageContentViewers\Exif_ContentViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ImageContentViewers\Json_ContentViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ImageContentViewers\Template.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ImageContentViewers\ToggleContent_Controller.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -238,10 +260,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Controls\Display types\DisplayByIcon\Match_Display_Icon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\MatchedItemPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -335,6 +353,9 @@
     </Content>
     <Resource Include="icons\Search\searching.png" />
     <Content Include="icons\Search\Cannot_Find_Result.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\GetEXIF.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\Read_EXIF.exe">

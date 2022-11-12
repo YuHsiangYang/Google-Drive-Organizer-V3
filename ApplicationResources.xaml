@@ -4,7 +4,7 @@
                     xmlns:extension ="clr-namespace:Google_Drive_Organizer_V3"
                     >
     <sys:String x:Key="NoData">"這裡"</sys:String>
-    <sys:Double x:Key="ScaleRatio">1.05</sys:Double>
+    <sys:Double x:Key="ScaleRatio">1.1</sys:Double>
     <SolidColorBrush x:Key="HoverColor" Color="#95d5b2"></SolidColorBrush>
     <CornerRadius x:Key="corner_radius">10</CornerRadius>
     <Storyboard x:Key="DragEnter_Transition">

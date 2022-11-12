@@ -36,9 +36,14 @@ namespace Google_Drive_Organizer_V3.Controls
 
         private async void DisplayPanel_Initialized(object sender, EventArgs e)
         {
+            //load the width from setting
+            if ((double)Properties.Settings.Default["EXIF_Width"] != EXIFViewer.DesiredSize.Width)
+            {
+                EXIFViewer_Column.Width = new GridLength((double)Properties.Settings.Default["EXIF_Width"], GridUnitType.Pixel);
+            }
             Progress<LoadEXIFRecord_ProgressReportModule> exif_progress = new Progress<LoadEXIFRecord_ProgressReportModule>();
             exif_progress.ProgressChanged += ExifLoading_Progress;
-            Exifs = await ImageExif_Functions.Load_Image_EXIF_Record(Matches, cts.Token, exif_progress);
+            Exifs = await ImageInfo_Functions.LoadImageInfo_Record(Matches, cts.Token, exif_progress);
 
             GlobalScripts.Disappear_Element(Loading_Progress, TimeSpan.FromSeconds(.2));
             await Task.Delay(TimeSpan.FromSeconds(.2));
@@ -47,11 +52,6 @@ namespace Google_Drive_Organizer_V3.Controls
             DisplayInterface.ShowPage(ApplicationVariables.PageNumber, Exifs);
 
 
-            //load the width from setting
-            if ((double)Properties.Settings.Default["EXIF_Width"] != EXIFViewer.DesiredSize.Width)
-            {
-                EXIFViewer_Column.Width = new GridLength((double)Properties.Settings.Default["EXIF_Width"], GridUnitType.Pixel);
-            }
 
             //Add event listener to the "Search" element
             Search.SearchDate_Event += Search_SearchDate_Event;
@@ -60,13 +60,13 @@ namespace Google_Drive_Organizer_V3.Controls
 
         private void Search_SearchFileName_Event(object sender, string e)
         {
-            List<ImageExif> images = ImageExif_Functions.SearchByFileName(Exifs, e);
+            List<ImageExif> images = ImageInfo_Functions.SearchByFileName(Exifs, e);
             DisplayInterface.ShowPage(ApplicationVariables.PageNumber, images);
         }
 
         private void Search_SearchDate_Event(object sender, Dictionary<DateTypes, int> e)
         {
-            DisplayInterface.ShowPage(ApplicationVariables.PageNumber, ImageExif_Functions.SearchByPhotoTakenTime(Exifs, e));
+            DisplayInterface.ShowPage(ApplicationVariables.PageNumber, ImageInfo_Functions.SearchByPhotoTakenTime(Exifs, e));
         }
 
         private void ExifLoading_Progress(object sender, LoadEXIFRecord_ProgressReportModule e)

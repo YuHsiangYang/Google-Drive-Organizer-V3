@@ -81,10 +81,10 @@ namespace Google_Drive_Organizer_V3
     {
         public MatchItem_Class(string image_location, string json_location)
         {
-            Image_Location = image_location;
-            Json_Location = json_location;
+            ImagePath = image_location;
+            JsonPath = json_location;
         }
-        public string Image_Location { get; set; }
-        public string Json_Location { get; private set; }
+        public string ImagePath { get; set; }
+        public string JsonPath { get; private set; }
     }
 }
