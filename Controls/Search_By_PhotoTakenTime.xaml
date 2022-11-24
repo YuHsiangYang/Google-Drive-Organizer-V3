@@ -12,8 +12,8 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ComboBox Margin="5, 0" Grid.Column="0" x:Name="Year" SelectionChanged="DateInput_SelectionChanged"/>
-        <ComboBox Margin="5, 0" Grid.Column="1" x:Name="Month" SelectionChanged="DateInput_SelectionChanged"/>
-        <ComboBox Margin="5, 0" Grid.Column="2" x:Name="Day" SelectionChanged="DateInput_SelectionChanged"/>
+        <ComboBox Margin="5, 0" Grid.Column="0" x:Name="Year"/>
+        <ComboBox Margin="5, 0" Grid.Column="1" x:Name="Month"/>
+        <ComboBox Margin="5, 0" Grid.Column="2" x:Name="Day"/>
     </Grid>
 </UserControl>

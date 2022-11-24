@@ -1,4 +1,5 @@
 ﻿using Google_Drive_Organizer_V3.Classes;
+using Google_Drive_Organizer_V3.Pages.MatchItem.Display_types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,14 +60,29 @@ namespace Google_Drive_Organizer_V3.Controls.ImageContentViewers
                 CalanderPopup.IsOpen = false;
             }
         }
+        /// <summary>
+        /// Use Match_Display_Icon class as input
+        /// </summary>
+        /// <param name="sender"></param>
 
-        public void DisplayEXIF(ImageEXIFData exif)
+        public void DisplayEXIF(object sender)
         {
-            //Set the content of EXIF viewer
-            Longitude.Content = ImageInfo_Functions.GPSDictionary_To_String(exif.GPS_Longitude);
-            Latitude.Content = ImageInfo_Functions.GPSDictionary_To_String(exif.GPS_Latitude);
-            Altitude.Content = exif.GPS_Altitude == "" ? ApplicationVariables.NoData : exif.GPS_Altitude;
-            ImageName.Content = System.IO.Path.GetFileName(exif.ImagePath); // Get the name and set the image name from the path
+            try
+            {
+                //Set the content of EXIF viewer
+                ImageExif exif = (sender as Match_Display_Icon).exif;
+                Longitude.Content = ImageInfo_Functions.GPSDictionary_To_String(exif.EXIFData.GPS_Longitude);
+                Latitude.Content = ImageInfo_Functions.GPSDictionary_To_String(exif.EXIFData.GPS_Latitude);
+                Altitude.Content = exif.EXIFData.GPS_Altitude == "" ? ApplicationVariables.NoData : exif.EXIFData.GPS_Altitude;
+                ImageName.Content = System.IO.Path.GetFileName(exif.EXIFData.ImagePath); // Get the name and set the image name from the path
+                CameraManufactor.Content = exif.EXIFData.CameralModel;
+                Artist.Content = exif.EXIFData.Artist;
+                UserComment.Content = exif.EXIFData.UserComment;
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Error while converting sender to Match_Display_Icon");
+            }
         }
     }
 }

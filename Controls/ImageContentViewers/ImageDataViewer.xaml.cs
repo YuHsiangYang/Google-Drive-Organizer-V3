@@ -88,7 +88,7 @@ namespace Google_Drive_Organizer_V3.Controls
             JsonViewer.DisplayJSONData(EXIF.JsonData);
 
             //Load the exif
-            EXIFViewer.DisplayEXIF(EXIF.EXIFData);
+            EXIFViewer.DisplayEXIF(activator);
             caller = activator as Match_Display_Icon; //Sets the caller of the method
         }
 
@@ -116,16 +116,16 @@ namespace Google_Drive_Organizer_V3.Controls
             switch (e)
             {
                 case ContentType.Json:
-                    GlobalScripts.SwipeTransition(EXIF_Json_Grid.Children[1], duration, GlobalScripts.SwipeDirection.RightToLeft, GlobalScripts.TransitionType.Disappear);
+                    GlobalScripts.SwipeTransition(EXIF_Json_Grid.Children[0], duration, GlobalScripts.SwipeDirection.RightToLeft, GlobalScripts.TransitionType.Disappear);
                     break;
                 case ContentType.EXIF:
-                    GlobalScripts.SwipeTransition(EXIF_Json_Grid.Children[1], duration, GlobalScripts.SwipeDirection.LeftToRight, GlobalScripts.TransitionType.Disappear);
+                    GlobalScripts.SwipeTransition(EXIF_Json_Grid.Children[0], duration, GlobalScripts.SwipeDirection.LeftToRight, GlobalScripts.TransitionType.Disappear);
                     break;
                 default:
                     break;
             }
             await Task.Delay(duration);
-            EXIF_Json_Grid.Children.Remove(EXIF_Json_Grid.Children[1]);
+            EXIF_Json_Grid.Children.Remove(EXIF_Json_Grid.Children[0]);
 
             //Animation for the selected content type
             switch (e)

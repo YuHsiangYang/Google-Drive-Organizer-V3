@@ -11,7 +11,7 @@
             <ColumnDefinition Width="150"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ComboBox x:Name="SearchType" Margin="5" SelectionChanged="SearchType_SelectionChanged"></ComboBox>
+        <ComboBox x:Name="SearchType" Margin="5" SelectionChanged="SearchType_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Grid Name="SearchControlGrid" Grid.Column="1" Margin="5">
         </Grid>
     </Grid>

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Google_Drive_Organizer_V3.Pages.MatchItem.Display_types"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="90" Height="100" Width="90" Margin="5" Name="UserControlMainGrid">
+             d:DesignHeight="100" d:DesignWidth="90" Height="100" Width="90" Margin="5" Name="UserControlMainGrid" GotFocus="UserControlMainGrid_GotFocus" LostFocus="UserControlMainGrid_LostFocus">
     <UserControl.Resources>
         <Color x:Key="OriginalBackgroundColor">#f8f9fa</Color>
         <Color x:Key="MouseEnterColor">#fca311</Color>
@@ -20,7 +20,14 @@
                 <SolidColorBrush x:Name="Background" Color="{StaticResource OriginalBackgroundColor}"></SolidColorBrush>
             </Border.Background>
         </Border>
-        <Canvas Grid.Row="0" x:Name="DisplayImage" Margin="5"></Canvas>
+        <Canvas Grid.Row="0" x:Name="DisplayImage" Margin="5">
+            <Canvas.Background>
+                <ImageBrush ImageSource="..\..\..\icons\Empty Image.png"/>
+            </Canvas.Background>
+            <Canvas.Effect>
+                <BlurEffect Radius="10"/>
+            </Canvas.Effect>
+        </Canvas>
         <Viewbox Grid.Row="1" >
             <Label Name="ImageFileName" Content="Image name"></Label>
         </Viewbox>
@@ -29,7 +36,7 @@
                 <EventTrigger RoutedEvent="MouseEnter">
                     <BeginStoryboard>
                         <Storyboard Storyboard.TargetName="Background" Storyboard.TargetProperty="Color">
-                            <ColorAnimation From="{StaticResource OriginalBackgroundColor}" To="{StaticResource MouseEnterColor}"  Duration="0:0:0.2"></ColorAnimation>
+                            <ColorAnimation From="{StaticResource OriginalBackgroundColor}" To="{StaticResource MouseEnterColor}"  Duration="0:0:0.2"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>

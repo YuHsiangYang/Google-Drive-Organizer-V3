@@ -63,8 +63,7 @@ namespace Google_Drive_Organizer_V3.Controls.ImageContentViewers
         public void DisplayJSONData(ImageJsonData jsonData)
         {
             //Dispaly the phototaken time.
-            PhotoTakenTimeDate.Content = jsonData.PhotoTakenTime_DateTime.Date.ToString();
-            PhotoTakenTime.Content = jsonData.PhotoTakenTime_DateTime.TimeOfDay.ToString();
+            PhotoTakenTimeDate.Content = jsonData.PhotoTakenTime_DateTime.ToString();
 
             //Display the GPS cordinates
             Longitude.Content = ImageInfo_Functions.GPSDictionary_To_String(jsonData.GPS_Longitude);

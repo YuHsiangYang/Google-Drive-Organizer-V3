@@ -68,5 +68,15 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem.Display_types
         {
             History.DisplayMatchPanel.EXIFViewer.DisplayImage(this, exif);
         }
+
+        private void UserControlMainGrid_GotFocus(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("Display Icon got focused");
+        }
+
+        private void UserControlMainGrid_LostFocus(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("Display icon lose focus");
+        }
     }
 }

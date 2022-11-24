@@ -70,7 +70,7 @@
                     <Label.Content>
                         <StackPanel Orientation="Horizontal">
                             <Label FontSize="11">作者:</Label>
-                            <Label Name="Author" FontSize="11"></Label>
+                            <Label Name="Artist" FontSize="11"></Label>
                         </StackPanel>
                     </Label.Content>
                 </Label>
@@ -78,7 +78,7 @@
                     <Label.Content>
                         <StackPanel Orientation="Horizontal">
                             <Label FontSize="11">註解:</Label>
-                            <Label Name="Comment" FontSize="11"></Label>
+                            <Label Name="UserComment" FontSize="11"></Label>
                         </StackPanel>
                     </Label.Content>
                 </Label>

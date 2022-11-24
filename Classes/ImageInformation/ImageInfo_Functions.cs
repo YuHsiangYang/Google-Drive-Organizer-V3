@@ -72,49 +72,6 @@ namespace Google_Drive_Organizer_V3.Classes
             detail.JsonData.GPS_Longitude = Double_To_DMS((double)json_object["geoDataExif"]["longitude"]);
             detail.JsonData.GPS_Altitude = json_object["geoDataExif"]["altitude"].ToString();
             detail.JsonData.Json_PhotoTakenTime = json_object["photoTakenTime"]["timestamp"].ToString();
-            //Console.WriteLine("Phototaken time " + detail.EXIFData.phototakentime_DateTime.ToString());
-            //foreach (KeyValuePair<string, string> item in exif_dictionary)
-            //{
-            //    s = item.Key;
-            //    Console.WriteLine("{0}: {1}", item.Key, item.Value);
-            //}
-            //try
-            //{
-            //    await Task.Run(async () =>
-            //        {
-            //            if (cancellationToken.IsCancellationRequested)
-            //            {
-            //                detail = new ImageExif();
-            //                cancellationToken.ThrowIfCancellationRequested();
-            //            }
-            //            start_info.Arguments = string.Format("\"{0}\" \"{1}\"", input_item.Image_Location, ApplicationVariables.NoData);
-            //            using (Process process = Process.Start(start_info))
-            //            {
-            //                using (StreamReader read = process.StandardOutput)
-            //                {
-            //                    string[] result = read.ReadToEnd().ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-            //                    detail.ImagePath = input_item.Image_Location;
-            //                    detail.phototakentime = result[0];
-            //                    detail.CameraManufactor = result[1];
-            //                    detail.GPS_Longitude = result[3];
-            //                    detail.GPS_Latitude = result[5];
-            //                    detail.GPS_Altitude = result[6];
-            //                    //detail.MD5 = UniversalFunctions.CalculateMD5(MD5Type.File, image_location);
-            //                }
-            //            }
-            //            string json_text = await Task.Run(() => File.ReadAllText(input_item.Json_Location));
-            //            JObject json = await Task.Run(() => JObject.Parse(json_text));
-            //            detail.Json_GPS_Longitude = json["geoDataExif"]["longitude"].ToString();
-            //            detail.Json_GPS_Latitude = json["geoDataExif"]["latitude"].ToString();
-            //            detail.Json_GPS_Altitude = json["geoDataExif"]["altitude"].ToString();
-            //            detail.Json_PhotoTakenTime = json["photoTakenTime"]["timestamp"].ToString();
-            //            detail.JsonPath = input_item.Json_Location;
-            //        });
-            //}
-            //catch (OperationCanceledException)
-            //{
-            //    Console.WriteLine("LoadImageDetail cancelled");
-            //}
             return detail;
         }
 

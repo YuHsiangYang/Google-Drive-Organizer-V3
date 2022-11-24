@@ -344,7 +344,9 @@
     <Content Include="icons\Drag\folder.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="icons\Empty Image.png" />
+    <Content Include="icons\Empty Image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="icons\Json_Icon.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

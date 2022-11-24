@@ -44,6 +44,7 @@ namespace Google_Drive_Organizer_V3.Controls
             Progress<LoadEXIFRecord_ProgressReportModule> exif_progress = new Progress<LoadEXIFRecord_ProgressReportModule>();
             exif_progress.ProgressChanged += ExifLoading_Progress;
             Exifs = await ImageInfo_Functions.LoadImageInfo_Record(Matches, cts.Token, exif_progress);
+            Search.Search_By_PhotoTakenTime.LoadPhotoTakenTimeComboboxItem(Exifs);
 
             GlobalScripts.Disappear_Element(Loading_Progress, TimeSpan.FromSeconds(.2));
             await Task.Delay(TimeSpan.FromSeconds(.2));

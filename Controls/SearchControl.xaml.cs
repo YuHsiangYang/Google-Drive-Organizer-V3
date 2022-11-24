@@ -80,5 +80,7 @@ namespace Google_Drive_Organizer_V3.Controls
             SearchControlGrid.Children.Add(to);
             GlobalScripts.Appear_Element(to, duration);
         }
+
+        
     }
 }

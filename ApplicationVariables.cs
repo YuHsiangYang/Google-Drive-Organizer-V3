@@ -13,5 +13,6 @@ namespace Google_Drive_Organizer_V3
         public static int PageNumber { get; set; } = 0;
         public static double RowHeight { get; set; } = 0;
         public static double ColumnWidth { get; set; } = 0;
+        public static string AllDate { get; } = "全部";
     }
 }

@@ -12,23 +12,26 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition MinHeight="200"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition x:Name="Row_Height" Height="auto" MinHeight="330"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Name="ImageArea">
+        <Grid Name="ImageArea" MinHeight="200">
             <Border Background="{StaticResource BackgroundColor}" CornerRadius="5" Margin="4" Padding="4">
                 <Canvas Name="ImagePreview"></Canvas>
             </Border>
         </Grid>
         <GridSplitter x:Name="RowSplitter" Grid.Row="1" Height="5" VerticalAlignment="Top" HorizontalAlignment="Stretch" DragCompleted="RowSplitter_DragCompleted"/>
-        <Grid Name="EXIFArea" Grid.Row="1" Margin="5">
-
-            <Border CornerRadius="5" Background="{StaticResource BackgroundColor}" Padding="10">
-                <Grid Name="EXIF_Json_Grid">
+        <Grid Name="EXIFArea" Grid.Row="1" Margin="5" VerticalAlignment="Stretch">
+            <Border CornerRadius="5" Background="{StaticResource BackgroundColor}" Padding="10" VerticalAlignment="Stretch">
+                <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <Grid Name="EXIF_Json_Grid">
+                        </Grid>
+                    </ScrollViewer>
                     <Grid Grid.Row="1">
                         <ImageContentViewers:ToggleContent_Controller x:Name="ContentController" ContentType_Changed="ContentController_ContentType_Changed"/>
                     </Grid>
