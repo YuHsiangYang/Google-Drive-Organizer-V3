@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="Google_Drive_Organizer_V3.Controls.SortMannerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Google_Drive_Organizer_V3.Controls.SortController"
+             xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="100">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/ColorPalettle.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/ApplicationResources.xaml"/>
+                <ResourceDictionary>
+                    <sys:Double x:Key="CornerRadius">4</sys:Double>
+                    <sys:Double x:Key="ArrowExpandAngle">45</sys:Double>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Viewbox>
+        <Grid VerticalAlignment="Stretch" Height="100" Width="100">
+            <Border Background="{StaticResource ColorSecondary}" CornerRadius="{StaticResource corner_radius}"/>
+            <Viewbox Margin="5">
+                <Grid Height="100" Width="100">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="36"/>
+                        <ColumnDefinition Width="64"/>
+                    </Grid.ColumnDefinitions>
+                    <svgc:SvgViewbox Source="/icons/sort-list.svg" Grid.Column="1"/>
+                    <Grid Grid.Column="0">
+                        <Rectangle x:Name="rectangle" HorizontalAlignment="Center" VerticalAlignment="Center" Height="80" Width="8" RadiusX="{StaticResource CornerRadius}" RadiusY="{StaticResource CornerRadius}" Fill="Black"/>
+                        <Grid Name="UpperArrow">
+                            <Rectangle Name="UpperArrowLeft" HorizontalAlignment="Center" Width="8" Height="25" VerticalAlignment="Top" Fill="Black" RadiusX="{StaticResource CornerRadius}" RadiusY="{StaticResource CornerRadius}" Margin="0,10,0,0" >
+                                <Rectangle.RenderTransformOrigin>
+                                    <Point>0.5, 0.16</Point>
+                                </Rectangle.RenderTransformOrigin>
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <RotateTransform>
+                                            <RotateTransform.Angle>0</RotateTransform.Angle>
+                                        </RotateTransform>
+                                        <RotateTransform x:Name="Rotate_UpperArrowLeft">
+                                            <RotateTransform.Angle>45</RotateTransform.Angle>
+                                        </RotateTransform>
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Name="UpperArrowRight" HorizontalAlignment="Center" Width="8" Height="25" VerticalAlignment="Top" Fill="Black" RadiusX="{StaticResource CornerRadius}" RadiusY="{StaticResource CornerRadius}" Margin="0,10,0,0" >
+                                <Rectangle.RenderTransformOrigin>
+                                    <Point>0.5, 0.16</Point>
+                                </Rectangle.RenderTransformOrigin>
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <RotateTransform>
+                                            <RotateTransform.Angle>0</RotateTransform.Angle>
+                                        </RotateTransform>
+                                        <RotateTransform x:Name="Rotate_UpperArrowRight">
+                                            <RotateTransform.Angle>-45</RotateTransform.Angle>
+                                        </RotateTransform>
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                        </Grid>
+                        <Grid Name="LowerArrow">
+                            <Rectangle x:Name="LowerArrowLeft" HorizontalAlignment="Center" Width="8" Height="25" VerticalAlignment="Bottom" Fill="Black" RadiusX="{StaticResource CornerRadius}" RadiusY="{StaticResource CornerRadius}" Margin="0,10,0,-7" >
+                                <Rectangle.RenderTransformOrigin>
+                                    <Point>0.5, 0.16</Point>
+                                </Rectangle.RenderTransformOrigin>
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <RotateTransform>
+                                            <RotateTransform.Angle>180</RotateTransform.Angle>
+                                        </RotateTransform>
+                                        <RotateTransform x:Name="Rotate_LowerArrowLeft">
+                                            <RotateTransform.Angle>-0</RotateTransform.Angle>
+                                        </RotateTransform>
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle x:Name="LowerArrowRight" HorizontalAlignment="Center" Width="8" Height="25" VerticalAlignment="Bottom" Fill="Black" RadiusX="{StaticResource CornerRadius}" RadiusY="{StaticResource CornerRadius}" Margin="0,0,0,-7" >
+                                <Rectangle.RenderTransformOrigin>
+                                    <Point>0.5, 0.16</Point>
+                                </Rectangle.RenderTransformOrigin>
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <RotateTransform>
+                                            <RotateTransform.Angle>180</RotateTransform.Angle>
+                                        </RotateTransform>
+                                        <RotateTransform x:Name="Rotate_LowerArrowRight">
+                                            <RotateTransform.Angle>0</RotateTransform.Angle>
+                                        </RotateTransform>
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Viewbox>
+            <Button Name="trigger" Grid.ColumnSpan="2" Opacity="0" Click="trigger_Click" Cursor="Hand"/>
+        </Grid>
+    </Viewbox>
+</UserControl>

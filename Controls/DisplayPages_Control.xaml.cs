@@ -18,32 +18,44 @@ namespace Google_Drive_Organizer_V3.Controls
     /// <summary>
     /// DisplayRange.xaml 的互動邏輯
     /// </summary>
-    public partial class DisplayRange : UserControl
+    public partial class DisplayPages_Control : UserControl
     {
         //Items per page = 30
         int pages = 0;
-        public event Action<int> PageChanged;
-        public DisplayRange()
+        public event EventHandler<int> PageChanged;
+        public DisplayPages_Control()
         {
             InitializeComponent();
         }
         public void LoadRange(int quantities)
         {
-            DisplayPanel.Children.Clear();
-            pages = (int)Math.Ceiling((double)quantities / (int)Properties.Settings.Default["Page_Size"]);
-            int total = pages++;
-            for (int i = 1; i < total; i++)
+            if ((int)Math.Ceiling((double)quantities / ApplicationVariables.PageSize) > pages)
             {
-                Button PageBTN = new Button()
+                PagesPanel.Children.Clear();
+                pages = (int)Math.Ceiling((double)quantities / ApplicationVariables.PageSize);
+                for (int i = 0; i < pages; i++)
                 {
-                    Content = i,
-                    Width = 15,
-                    Height = 15,
-                    Margin = new Thickness(2.5)
-                };
-                PageBTN.Click += PageBTN_Click;
-                ButtonCustomProperties.SetCornerRadius(PageBTN, 7.5);
-                DisplayPanel.Children.Add(PageBTN);
+                    
+                    Button PageBTN = new Button()
+                    {
+                        Content = i +1 ,
+                        Width = 20,
+                        Height = 20,
+                        Margin = new Thickness(2.5),
+                        BorderBrush = null,
+                        Background = Resources["ColorPrimary"] as SolidColorBrush,
+                        Foreground = Resources["ColorSecondary"] as SolidColorBrush,
+                    };
+                    Viewbox BTNViewbox = new Viewbox()
+                    {
+                        Child = PageBTN,
+                    };
+
+                    PageBTN.Click += PageBTN_Click;
+                    ButtonCustomProperties.SetCornerRadius(PageBTN, PageBTN.Width / 2);
+                    PagesPanel.Children.Add(BTNViewbox);
+                }
+
             }
 
         }
@@ -51,8 +63,8 @@ namespace Google_Drive_Organizer_V3.Controls
         private void PageBTN_Click(object sender, RoutedEventArgs e)
         {
             int page = (int)((Button)sender).Content;
-            PageChanged(page);
-            Properties.Settings.Default["page_number"] = page;
+            ApplicationVariables.PageNumber = page-1;
+            PageChanged?.Invoke(this, page);
         }
     }
 }

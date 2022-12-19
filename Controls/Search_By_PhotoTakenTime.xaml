@@ -6,14 +6,17 @@
              xmlns:local="clr-namespace:Google_Drive_Organizer_V3.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="40" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/ApplicationResources.xaml"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ComboBox Margin="5, 0" Grid.Column="0" x:Name="Year"/>
-        <ComboBox Margin="5, 0" Grid.Column="1" x:Name="Month"/>
-        <ComboBox Margin="5, 0" Grid.Column="2" x:Name="Day"/>
+        <ComboBox Margin="5, 0" Grid.Column="0" x:Name="Year" Style="{StaticResource CustoCombobox}" Foreground="White" Background="{Binding Mode=OneWay, Source={StaticResource ColorPrimary}}" IsReadOnly="True"/>
+        <ComboBox Margin="5, 0" Grid.Column="1" x:Name="Month" Style="{StaticResource CustoCombobox}" Foreground="White" Background="{Binding Mode=OneWay, Source={StaticResource ColorPrimary}}"/>
+        <ComboBox Margin="5, 0" Grid.Column="2" x:Name="Day" Style="{StaticResource CustoCombobox}" Foreground="White" Background="{Binding Mode=OneWay, Source={StaticResource ColorPrimary}}"/>
     </Grid>
 </UserControl>

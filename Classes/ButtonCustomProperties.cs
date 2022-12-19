@@ -17,7 +17,7 @@ namespace Google_Drive_Organizer_V3
         public static readonly DependencyProperty HoverColor = DependencyProperty.Register("Hover Color", typeof(Color), typeof(ButtonCustomProperties));
         public static ResourceDictionary resourceDictionary { get; set; } = new ResourceDictionary()
         {
-            Source = new Uri(System.IO.Path.GetFullPath("ApplicationResources.xaml"), UriKind.Absolute),
+            Source = new Uri(@"pack://application:,,,/ApplicationResources.xaml", UriKind.Absolute),
         };
         public static double GetCornerRadius(Button target)
         {

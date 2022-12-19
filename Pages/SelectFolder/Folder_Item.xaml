@@ -8,12 +8,19 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:Pages="clr-namespace:Google_Drive_Organizer_V3.Pages" x:Name="Main" x:Class="Google_Drive_Organizer_V3.Pages.SelectFolder.Folder_Item"
              mc:Ignorable="d" 
-             d:DesignHeight="75" d:DesignWidth="388" Initialized="Main_Initialized">
+             d:DesignHeight="75" d:DesignWidth="388">
     <UserControl.Resources>
-        <Duration x:Key="AnimationDuration">0:0:0.2</Duration>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <Duration x:Key="AnimationDuration">0:0:0.2</Duration>
+                    <sys:Double x:Key="Radius">7</sys:Double>
+                </ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/ColorPalettle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <AlternationConverter x:Key="AlternationConverter"/>
+        </ResourceDictionary>
         <!--<CornerRadius x:Key="Radius">3</CornerRadius>-->
-        <sys:Double x:Key="Radius">7</sys:Double>
-        <Storyboard x:Key="Storyboard1"/>
     </UserControl.Resources>
     <Grid Margin="2">
         <Grid.RowDefinitions>
@@ -29,7 +36,7 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <!--<Pages:ProgressBar x:Name="Progress" Grid.ColumnSpan="3" Grid.Column="1" Grid.Row ="1"></Pages:ProgressBar>-->
-        <Border x:Name="Background_Border" Grid.ColumnSpan ="5" Grid.RowSpan="3" Background="White" BorderBrush="#FFD6D6D6" BorderThickness="1">
+        <Border x:Name="Background_Border" Grid.ColumnSpan ="5" Grid.RowSpan="3" BorderThickness="1" Background="{StaticResource ColorTertiary}">
             <Border.CornerRadius>
                 <CornerRadius BottomLeft="{StaticResource Radius}" TopRight="{StaticResource Radius}"></CornerRadius>
             </Border.CornerRadius>
@@ -39,7 +46,7 @@
                 <EventTrigger RoutedEvent="MouseEnter">
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Name="Mouse_Enter_ColorAnimation" Duration="{StaticResource AnimationDuration}" From="Transparent" To="#FFFF7878" Storyboard.TargetName="Delete_Icon_SolidColorBrush" Storyboard.TargetProperty="Color"/>
+                            <ColorAnimation Name="Mouse_Enter_ColorAnimation" Duration="{StaticResource AnimationDuration}" From="Transparent" To="{Binding Source={StaticResource CTAColor}, Path=Color}"  Storyboard.TargetName="Delete_Icon_SolidColorBrush" Storyboard.TargetProperty="Color"/>
                             <DoubleAnimation Duration="{StaticResource AnimationDuration}" From="30" To="35" Storyboard.TargetName="Delete_Icon" Storyboard.TargetProperty="Height"></DoubleAnimation>
                         </Storyboard>
                     </BeginStoryboard>
@@ -61,7 +68,7 @@
                     <SolidColorBrush x:Name="Delete_Icon_SolidColorBrush"></SolidColorBrush>
                 </Border.Background>
             </Border>
-            <svgc:SvgViewbox x:Name="Delete_Icon" Height="30" Source=".\icons\Ban.svg" Width="{Binding ElementName=Delete_Icon, Path=Height}" MouseLeftButtonUp="Delete_Icon_MouseLeftButtonUp"></svgc:SvgViewbox>
+            <svgc:SvgViewbox x:Name="Delete_Icon" Height="30" Source="/icons/trash.svg" Width="{Binding ElementName=Delete_Icon, Path=Height}" MouseLeftButtonUp="Delete_Icon_MouseLeftButtonUp"></svgc:SvgViewbox>
         </Grid>
 
         <Viewbox Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left">
@@ -70,13 +77,15 @@
             </StackPanel>
         </Viewbox>
         <Viewbox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left">
-            <StackPanel>
-                <Label x:Name="JsonCount_Label" Content="Json:"></Label>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Json:"/>
+                <Label x:Name="JsonCount_Label" Content=""/>
             </StackPanel>
         </Viewbox>
         <Viewbox Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left">
-            <StackPanel>
-                <Label x:Name="ImageCount_Label" Content="圖片:"></Label>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="圖片:"/>
+                <Label x:Name="ImageCount_Label" Content=""/>
             </StackPanel>
         </Viewbox>
         <Pages:ProgressBar x:Name="Progress" Grid.Column="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" Grid.Row="1"/>

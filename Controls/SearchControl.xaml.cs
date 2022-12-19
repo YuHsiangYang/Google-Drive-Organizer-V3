@@ -21,11 +21,14 @@ namespace Google_Drive_Organizer_V3.Controls
     /// </summary>
     public partial class SearchControl : UserControl
     {
-        public Search_By_FileName Search_By_FileName { get; set; } = new Search_By_FileName();
-        public Search_By_PhotoTakenTime Search_By_PhotoTakenTime { get; set; } = new Search_By_PhotoTakenTime();
+        private Search_By_FileName Search_By_FileName { get; set; } = new Search_By_FileName();
+        private Search_By_PhotoTakenTime Search_By_PhotoTakenTime { get; set; } = new Search_By_PhotoTakenTime();
 
         public event EventHandler<Dictionary<DateTypes, int>> SearchDate_Event;
         public event EventHandler<string> SearchFileName_Event;
+
+        public object CurrentFilter;
+
 
         private enum SearchTypes
         {
@@ -43,13 +46,19 @@ namespace Google_Drive_Organizer_V3.Controls
 
         private void Search_By_FileName_SearchFileName(object sender, string e)
         {
+            CurrentFilter = e;
             SearchFileName_Event?.Invoke(sender, e);
         }
         private void Search_By_PhotoTakenTime_SelectedDateChanged(object sender, Dictionary<DateTypes, int> e)
         {
+            CurrentFilter = e;
             SearchDate_Event?.Invoke(sender, e);
         }
 
+        public void LoadSelectionDates(List<ImageExif> exifs)
+        {
+            Search_By_PhotoTakenTime.LoadPhotoTakenTimeComboboxItem(exifs);
+        }
 
         private void SearchType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -80,7 +89,5 @@ namespace Google_Drive_Organizer_V3.Controls
             SearchControlGrid.Children.Add(to);
             GlobalScripts.Appear_Element(to, duration);
         }
-
-        
     }
 }

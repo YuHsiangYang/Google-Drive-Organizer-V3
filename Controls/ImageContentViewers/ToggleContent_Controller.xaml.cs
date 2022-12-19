@@ -25,9 +25,8 @@ namespace Google_Drive_Organizer_V3.Controls.ImageContentViewers
     {
         private Thickness JsonContent = new Thickness(0, 0, 0, 0);
         private Thickness EXIFContent = new Thickness(50, 0, 0, 0);
-        public ContentType PreviousContentType;
+        public ContentType PreviousContentType = ContentType.EXIF;
         private Dictionary<ContentType, Thickness> animation_dictionary = new Dictionary<ContentType, Thickness>();
-
         public event EventHandler<ContentType> ContentType_Changed;
 
         public ToggleContent_Controller()
@@ -54,7 +53,9 @@ namespace Google_Drive_Organizer_V3.Controls.ImageContentViewers
             };
             ContentSelection_Rectangle.BeginAnimation(MarginProperty, selection_animation);
             (MainControl.FindName(PreviousContentType.ToString() + "Label") as Label).FontWeight = FontWeights.Regular;
+            (MainControl.FindName(PreviousContentType.ToString() + "Label") as Label).Foreground = Resources["ColorPrimary"] as SolidColorBrush;
             (MainControl.FindName(CurrentContentType.ToString() + "Label") as Label).FontWeight = FontWeights.Bold;
+            (MainControl.FindName(CurrentContentType.ToString() + "Label") as Label).Foreground = Resources["ColorSecondary"] as SolidColorBrush;
 
             if (PreviousContentType != CurrentContentType)
             {

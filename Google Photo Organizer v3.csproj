@@ -52,6 +52,9 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.WindowsAPICodePack-Core.1.1.0.0\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
@@ -116,6 +119,10 @@
       <CustomToolNamespace>Google_Drive_Organizer_V3</CustomToolNamespace>
     </Compile>
     <Compile Include="Classes\ImageInformation\JSON_Data\ImageJsonData.cs" />
+    <Compile Include="ColorToSolidColorBrush_Converter.cs" />
+    <Compile Include="Controls\DeleteButton.xaml.cs">
+      <DependentUpon>DeleteButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Display types\DisplayByIcon\Display_Icon.cs" />
     <Compile Include="Controls\Display types\DisplayByList\Display_List.cs" />
     <Compile Include="Controls\Display types\DisplayByList\Match_Display_List.xaml.cs">
@@ -152,6 +159,12 @@
     <Compile Include="Controls\Search_By_PhotoTakenTime.xaml.cs">
       <DependentUpon>Search_By_PhotoTakenTime.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SortController\SortMannerControl.xaml.cs">
+      <DependentUpon>SortMannerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SortController\SortTypes.xaml.cs">
+      <DependentUpon>MainSortController.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DisplayPanel.xaml.cs">
       <DependentUpon>DisplayPanel.xaml</DependentUpon>
     </Compile>
@@ -179,18 +192,30 @@
       <DependentUpon>SelectOutputDestination.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\SelectedFolder_Record.cs" />
+    <Compile Include="Controls\StageNavigationController.xaml.cs">
+      <DependentUpon>StageNavigationController.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Scripts\GlobalScripts.cs" />
     <Compile Include="ApplicationVariables.cs" />
     <Compile Include="Settings.cs" />
-    <Content Include="ApplicationResources.xaml">
+    <Page Include="ApplicationResources.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </Page>
+    <Page Include="ColorPalettle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Cannot_Find_Search_Result.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CircleSwitch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DeleteButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -218,10 +243,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ImageContentViewers\Template.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\ImageContentViewers\ToggleContent_Controller.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -231,6 +252,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Search_By_PhotoTakenTime.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SortController\SortMannerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SortController\MainSortController.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -283,6 +316,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\StageNavigationController.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ProgressBar.xaml.cs">
@@ -310,10 +347,12 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="icons\Search\searching.ai" />
     <None Include="packages.config" />
+    <None Include="palette.ase" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -323,16 +362,26 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Color palettle.png" />
+    <Content Include="icons\search.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\sort-amount-down-alt.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\sort-amount-up-alt.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\sort-list.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\trash.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="icons\Ban.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icons\Delete.svg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Controls\Display types\Icons\Image.svg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Controls\Display types\Icons\List item.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icons\Drag\Arrow.svg">

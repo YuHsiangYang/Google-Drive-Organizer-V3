@@ -7,9 +7,17 @@
         xmlns:Pages="clr-namespace:Google_Drive_Organizer_V3.Pages" xmlns:Controls="clr-namespace:Google_Drive_Organizer_V3.Controls" x:Class="Google_Drive_Organizer_V3.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="441" Width="667" MinHeight="620" MinWidth="667">
-    <Grid x:Name="MainWindow_Grid">
-        <Pages:SelectFolderPage Select_Folder_Finish="SelectFolder_Control_Select_Folder_Finish" x:Name="SelectFolder_Control" HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Stretch"/>
-
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="55"/>
+        </Grid.RowDefinitions>
+        <Grid Name="MainWindow_Grid">
+            <Pages:SelectFolderPage x:Name="SelectFolder_Control" HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Stretch"/>
+        </Grid>
+        <Grid Name="Controller" Grid.Row="1">
+            <Pages:StageNavigationController x:Name="NavController" Grid.Row="1" VerticalAlignment="Stretch"/>
+        </Grid>
         <!--<Controls:CircleSwitch></Controls:CircleSwitch>-->
     </Grid>
 </Window>

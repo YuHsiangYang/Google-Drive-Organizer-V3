@@ -27,13 +27,14 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem.Display_types
             InitializeComponent();
         }
         public ImageExif exif = new ImageExif();
+        public bool IsSelected { get; private set; } = false;
         private void Match_Display_Icon_Initialized(object sender, EventArgs e)
         {
             try
             {
                 BitmapImage image = new BitmapImage();
                 image.BeginInit();
-                image.DecodePixelHeight = 300;
+                image.DecodePixelHeight = 100;
                 image.UriSource = new Uri(exif.EXIFData.ImagePath);
                 image.EndInit();
                 ImageBrush image_brush = new ImageBrush();
@@ -46,7 +47,7 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem.Display_types
             {
                 BitmapImage image = new BitmapImage();
                 image.BeginInit();
-                image.DecodePixelHeight = 300;
+                image.DecodePixelHeight = 100;
                 image.UriSource = new Uri(@"..\..\..\icons\Empty Image.png", UriKind.Relative);
                 image.EndInit();
                 ImageBrush image_brush = new ImageBrush();
@@ -77,6 +78,16 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem.Display_types
         private void UserControlMainGrid_LostFocus(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("Display icon lose focus");
+        }
+
+        private void ClickTrigger_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            System.Diagnostics.Process.Start(exif.EXIFData.ImagePath);
+        }
+
+        private void SelectCheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            IsSelected = (bool)(sender as CheckBox).IsChecked;
         }
     }
 }

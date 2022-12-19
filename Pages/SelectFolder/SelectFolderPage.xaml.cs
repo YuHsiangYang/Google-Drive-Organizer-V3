@@ -17,6 +17,7 @@ using System.Diagnostics;
 using System.Windows.Shapes;
 using Google_Drive_Organizer_V3.Pages.SelectFolder;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Google_Drive_Organizer_V3.Pages
 {
@@ -28,78 +29,63 @@ namespace Google_Drive_Organizer_V3.Pages
         public SelectFolderPage()
         {
             InitializeComponent();
-            Nxt_Btn.Visibility = Visibility.Hidden;
-            //var temp = (Button)template;
         }
-        public event Action Select_Folder_Finish;
+
+        public event EventHandler Select_Folder_Finish;
+        public List<Folder_Item> ImportedFolders { get; set; } = new List<Folder_Item>();
+        private void DragTrigger_Grid_Drop(object sender, DragEventArgs e)
+        {
+            List<string> directory_imported = ((string[])e.Data.GetData(DataFormats.FileDrop, false)).ToList();
+            List<string> valid_imports = new List<string>();
+            List<string> invalid_import = new List<string>();
+            string message = "";
+            foreach (string sub_directory in directory_imported)
+            {
+                FileAttributes attribute = File.GetAttributes(sub_directory);
+                if (attribute.HasFlag(FileAttributes.Directory))
+                {
+                    valid_imports.Add(sub_directory);
+                }
+                else
+                {
+                    invalid_import.Add(System.IO.Path.GetFileName(sub_directory));
+                    message += System.IO.Path.GetFileName(sub_directory) + Environment.NewLine;
+                }
+            }
+            if (invalid_import.Count > 0)
+            {
+                MessageBox.Show("無法添加 " + Environment.NewLine + message + "因為" + (invalid_import.Count > 1 ? "它們" : "它") + "不是資料夾", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            ImportFolders(valid_imports);
+            DragTrigger_Grid_DragLeave(sender, e);
+        }
         private void Select_Folder_Btn_Click(object sender, RoutedEventArgs e)
         {
-            var template = Nxt_Btn.Template;
-            Border d = (Border)Nxt_Btn.Template.FindName("Front", Nxt_Btn);
-            //d.CornerRadius = new CornerRadius(10);
-            //Nxt_Btn.UpdateDefaultStyle();
-            //Nxt_Btn.UpdateLayout();
-            //Progress_Bar.percentage += 0.1;
             CommonOpenFileDialog dialog = new CommonOpenFileDialog();
             dialog.IsFolderPicker = true;
-            dialog.InitialDirectory = @"C:\Users\" + Environment.UserName + "Yu - Hsiang Folder";
+            dialog.InitialDirectory = @"C:\Users\" + Environment.UserName + "Documents";
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                //if(place_holder != null)
-                //{
-                //    FolderItem_StackPanel.Children.Clear();
-                //}
-                Folder_Item folder = new Folder_Item(dialog.FileName);
-                folder.Height = 75;
-                FolderItem_StackPanel.Children.Add(folder);
-                //MessageBox.Show(dialog.FileName);
+                ImportFolders(new List<string> { dialog.FileName });
+                //Select_Folder_Finish?.Invoke(this, e);
             }
         }
 
-        private void MainWindow_Initialized(object sender, EventArgs e)
+        private void Folder_Item_Loaded(object sender, Folder_Item e)
         {
-            throw new NotImplementedException();
+            ImportedFolders.Add(e);
+            CheckFolderCount();
         }
 
-        private void Nxt_Btn_Click(object sender, RoutedEventArgs e)
+        private void FolderDeleted(object sender, Folder_Item e)
         {
-            Select_Folder_Finish();
+            ImportedFolders.Remove(e);
+            FolderItem_StackPanel.Children.Remove(e);
+            CheckFolderCount();
         }
 
-        //Canvas DragImage = new Canvas();
-
-        private void Main_Grid_MouseMove(object sender, MouseEventArgs e)
-        {
-            //Thickness margin = new Thickness(e.GetPosition(Main_Grid).X, e.GetPosition(Main_Grid).Y, Main_Grid.ActualHeight - e.GetPosition(Main_Grid).X, Main_Grid.ActualHeight - e.GetPosition(Main_Grid).Y);
-            //DragImage.Margin = margin;
-            //Console.WriteLine("Mouse position" + e.GetPosition(Main_Grid).X);
-
-        }
         private async void Drop_Container_DragEnter(object sender, DragEventArgs e)
         {
-            //if (Main_Grid.Children.Contains(DragImage) == false)
-            //{
-
-            //    BitmapImage image = new BitmapImage(new Uri(@".\icons\Drag\folder.png", UriKind.Relative));
-            //    ImageBrush imageBrush = new ImageBrush(image);
-            //    DragImage.Background = imageBrush;
-            //    DragImage.Height = 100;
-            //    DragImage.Width = 100;
-            //    Grid.SetColumnSpan(DragImage, 2);
-            //    Grid.SetRowSpan(DragImage, 2);
-            //    Main_Grid.Children.Add(DragImage);
-            //}
-            //Main_Grid.MouseMove += Main_Grid_MouseMove;
-            //DoubleAnimation animation = new DoubleAnimation(0, 100, new Duration(TimeSpan.FromSeconds(.2)));
-            //TranslateTransform transform = new TranslateTransform();
-            //stackPanel.RenderTransform = transform;
-            //transform.BeginAnimation(TranslateTransform.YProperty, animation);
-            //Storyboard.SetTargetProperty(animation, new PropertyPath(TranslateTransform.YProperty));
-            //Storyboard.SetTarget(animation, stackPanel);
-            //Storyboard storyboard = new Storyboard();
-            //storyboard.Children.Add(animation);
-            //storyboard.Duration = new Duration(TimeSpan.FromSeconds(.2));
-            //storyboard.Begin();
             GlobalScripts.Disappear_Element(stackPanel, TimeSpan.FromSeconds(.2));
             stackPanel.Visibility = Visibility.Hidden;
             await Task.Delay(TimeSpan.FromSeconds(.1));
@@ -121,37 +107,35 @@ namespace Google_Drive_Organizer_V3.Pages
             stackPanel.Visibility = Visibility.Visible;
             GlobalScripts.Appear_Element(stackPanel, TimeSpan.FromSeconds(.2));
         }
-
-        private void DragTrigger_Grid_Drop(object sender, DragEventArgs e)
+        private void CheckFolderCount()
         {
-            List<string> directory_imported = ((string[])e.Data.GetData(DataFormats.FileDrop, false)).ToList();
-            List<string> valid_import = new List<string>();
-            List<string> invalid_import = new List<string>();
-            string message = "";
-            foreach (string sub_directory in directory_imported)
+            if (ImportedFolders.Count() > 0)
             {
-                FileAttributes attribute = File.GetAttributes(sub_directory);
-                if (attribute.HasFlag(FileAttributes.Directory))
+                Select_Folder_Finish?.Invoke(this, new EventArgs());
+            }
+            else if (ImportedFolders.Count() == 0)
+            {
+                //NavController.CanContinue = false;
+            }
+        }
+        public void ImportFolders(List<string> paths)
+        {
+            foreach (string path in paths)
+            {
+                if (ImportedFolders.FindAll(item => item.FolderPath == path).Count == 0)
                 {
-                    valid_import.Add(sub_directory);
+                    Folder_Item folder = new Folder_Item(path);
+                    folder.Height = 75;
+                    folder.Loaded += Folder_Item_Loaded;
+                    folder.Folde_Item_DeleteEvent += FolderDeleted;
+                    FolderItem_StackPanel.Children.Add(folder);
                 }
                 else
                 {
-                    invalid_import.Add(System.IO.Path.GetFileName(sub_directory));
-                    message += System.IO.Path.GetFileName(sub_directory) + Environment.NewLine;
+                    MessageBox.Show("已經添加過 '" + new DirectoryInfo(path).Name + "' 。", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    Console.WriteLine("找到資料");
                 }
             }
-            if (invalid_import.Count > 0)
-            {
-                MessageBox.Show("無法添加 " + Environment.NewLine + message + "因為" + (invalid_import.Count > 1 ? "它們" : "它") + "不是資料夾", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            foreach (string folder_location in valid_import)
-            {
-                Folder_Item folder_item = new Folder_Item(folder_location);
-                folder_item.Height = 75;
-                FolderItem_StackPanel.Children.Add(folder_item);
-            }
-            DragTrigger_Grid_DragLeave(sender, e);
         }
     }
 }

@@ -6,19 +6,28 @@
              xmlns:local="clr-namespace:Google_Drive_Organizer_V3.Controls.ImageContentViewers"
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="110">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/ApplicationResources.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/ColorPalettle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Viewbox Margin="0">
         <Grid>
+            <Border Background="{StaticResource ColorTertiary}" CornerRadius="5"/>
             <Grid Margin="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Rectangle Name="ContentSelection_Rectangle" RadiusX="5" RadiusY="5" Fill="#FFECECEC" Grid.ColumnSpan="2" Width="50" HorizontalAlignment="Left" Margin="0,0,0,0"></Rectangle>
+                <Border Name="ContentSelection_Rectangle" CornerRadius="{StaticResource corner_radius}" Background="{StaticResource ColorPrimary}" Grid.ColumnSpan="2" Width="50" HorizontalAlignment="Left" Margin="50,0,0,0"/>
                 <Viewbox Grid.Column="0" Width="50" Height="20">
-                    <Label Content="Json 資料" FontSize="9" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Name="JsonLabel" FontWeight="Bold"/>
+                    <Label Content="Json 資料" FontSize="9" Foreground="{StaticResource ColorPrimary}" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Name="JsonLabel" FontWeight="Bold"/>
                 </Viewbox>
                 <Viewbox Grid.Column="1" Width="50" Height="20">
-                    <Label Content="EXIF 資料" FontSize="9" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Name="EXIFLabel"/>
+                    <Label Content="EXIF 資料" FontSize="9" Foreground="{StaticResource ColorSecondary}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Name="EXIFLabel"/>
                 </Viewbox>
                 <Rectangle Name="Json" Grid.Column="0" Fill="#0000" MouseLeftButtonUp="ContentToggled" Cursor="Hand"/>
                 <Rectangle Name="EXIF" Grid.Column="1" Fill="#0000" MouseLeftButtonUp="ContentToggled" Cursor="Hand"/>

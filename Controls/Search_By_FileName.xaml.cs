@@ -22,7 +22,6 @@ namespace Google_Drive_Organizer_V3.Controls
     /// </summary>
     public partial class Search_By_FileName : UserControl
     {
-        public CancellationTokenSource CancellationToken { get; set; } = new CancellationTokenSource();
         public event EventHandler<string> SearchFileName;
         public Search_By_FileName()
         {

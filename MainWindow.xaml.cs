@@ -27,24 +27,57 @@ namespace Google_Drive_Organizer_V3
             InitializeComponent();
             MainWindow_Grid.Children.Clear();
             MainWindow_Grid.Children.Add(History.SelectFolder);
-            History.SelectFolder.Select_Folder_Finish += SelectFolder_Control_Select_Folder_Finish;
+            History.SelectFolder.Select_Folder_Finish += SelectFolder_Select_Folder_Finish;
         }
 
-        private async void SelectFolder_Control_Select_Folder_Finish()
+        private void SelectFolder_Select_Folder_Finish(object sender, EventArgs e)
         {
+            NavController.CanContinue = true;
+            NavController.ProceedToPrevious_Event += async delegate
+            {
+                await ShowSelectFolderPage();
+                NavController.ProceedToNext_Event += async delegate
+                {
+                    await ShowDisplayPanel();
+                };
+            };
+            NavController.ProceedToNext_Event += async delegate
+            {
+                await ShowDisplayPanel();
+            };
+        }
+
+        private async Task ShowDisplayPanel()
+        {
+            GlobalScripts.Disappear_Element(SelectFolder_Control, TimeSpan.FromSeconds(0.2));
+            await Task.Delay(TimeSpan.FromSeconds(0.2));
             MainWindow_Grid.Children.Clear();
             Progress<LoadEXIFRecord_ProgressReportModule> progress = new Progress<LoadEXIFRecord_ProgressReportModule>();
-            CancellationTokenSource cts = new CancellationTokenSource();
-            History.DisplayMatchPanel = new Controls.DisplayPanel(await MatchItem_Record.LoadMatch(SelectedFolder_Record.Folders, progress, cts.Token));
+            History.DisplayMatchPanel = new Controls.DisplayPanel(await MatchItem_Record.LoadMatch(History.SelectFolder.ImportedFolders, progress));
             //History.MatchedItem.NextStepTriggered += MatchedItem_NextStepTriggered;
+            History.DisplayMatchPanel.StageFinished += DisplayMatchPanel_StageFinished;
             MainWindow_Grid.Children.Add(History.DisplayMatchPanel);
+            GlobalScripts.Appear_Element(History.DisplayMatchPanel, TimeSpan.FromSeconds(0.2));
+            NavController.CanGoBack = true;
+            NavController.ProceedToNext_Event = null;
         }
 
-        private void MatchedItem_NextStepTriggered()
+        private async Task ShowSelectFolderPage()
         {
+            GlobalScripts.Disappear_Element(MainWindow_Grid.Children[0], TimeSpan.FromSeconds(0.2));
+            await Task.Delay(TimeSpan.FromSeconds(0.2));
             MainWindow_Grid.Children.Clear();
-            MainWindow_Grid.Children.Add(History.OutputDistination);
+            MainWindow_Grid.Children.Add(History.SelectFolder);
+            GlobalScripts.Appear_Element(History.SelectFolder, TimeSpan.FromSeconds(0.2));
+        }
 
+        private void DisplayMatchPanel_StageFinished(object sender, List<Classes.ImageExif> e)
+        {
+            NavController.ProceedToNext_Event += delegate
+            {
+                MainWindow_Grid.Children.Clear();
+                MainWindow_Grid.Children.Add(History.OutputDistination);
+            };
         }
     }
 }

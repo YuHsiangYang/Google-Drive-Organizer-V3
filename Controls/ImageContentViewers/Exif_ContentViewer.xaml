@@ -7,12 +7,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="310" d:DesignWidth="225">
     <UserControl.Resources>
-        <ResourceDictionary Source="Template.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="pack://application:,,,/ColorPalettle.xaml"></ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <Border CornerRadius="5" Background="{StaticResource BackgroundColor}"  Padding="10">
+        <Border CornerRadius="5" Background="{StaticResource ColorSecondary}"  Padding="10">
             <StackPanel VerticalAlignment="Top">
-                <Label BorderThickness="0, 0, 0, .5" BorderBrush="{StaticResource BorderColor}">
+                <Label BorderThickness="0, 0, 0, .5" BorderBrush="{StaticResource GrayPrimary}">
                     <Label.Content>
                         <StackPanel Orientation="Horizontal">
                             <Label FontSize="11">照片名稱:</Label>
@@ -20,7 +20,7 @@
                         </StackPanel>
                     </Label.Content>
                 </Label>
-                <Label BorderThickness="0, 0, 0, .5" BorderBrush="{StaticResource BorderColor}" Cursor="Hand">
+                <Label BorderThickness="0, 0, 0, .5" BorderBrush="{StaticResource GrayPrimary}" Cursor="Hand">
                     <Label.Content>
                         <StackPanel Orientation="Horizontal" Name="PhotoTakenTimeStackPanel">
                             <Label FontSize="11">原始拍攝日期:</Label>
@@ -34,7 +34,7 @@
                         </StackPanel>
                     </Label.Content>
                 </Label>
-                <Label BorderThickness="0, 0, 0, .5" BorderBrush="{StaticResource BorderColor}">
+                <Label BorderThickness="0, 0, 0, .5" BorderBrush="{StaticResource GrayPrimary}">
                     <Label.Content>
                         <StackPanel Orientation="Horizontal">
                             <Label FontSize="11">經度:</Label>
@@ -42,7 +42,7 @@
                         </StackPanel>
                     </Label.Content>
                 </Label>
-                <Label BorderThickness="0, 0, 0, .5" BorderBrush="{StaticResource BorderColor}">
+                <Label BorderThickness="0, 0, 0, .5" BorderBrush="{StaticResource GrayPrimary}">
                     <Label.Content>
                         <StackPanel Orientation="Horizontal">
                             <Label FontSize="11">緯度:</Label>
@@ -50,7 +50,7 @@
                         </StackPanel>
                     </Label.Content>
                 </Label>
-                <Label BorderThickness="0, 0, 0, .5" BorderBrush="{StaticResource BorderColor}">
+                <Label BorderThickness="0, 0, 0, .5" BorderBrush="{StaticResource GrayPrimary}">
                     <Label.Content>
                         <StackPanel Orientation="Horizontal">
                             <Label FontSize="11">海拔:</Label>
@@ -58,7 +58,7 @@
                         </StackPanel>
                     </Label.Content>
                 </Label>
-                <Label BorderThickness="0, 0, 0, .5" BorderBrush="{StaticResource BorderColor}">
+                <Label BorderThickness="0, 0, 0, .5" BorderBrush="{StaticResource GrayPrimary}">
                     <Label.Content>
                         <StackPanel Orientation="Horizontal">
                             <Label FontSize="11">相機:</Label>
@@ -66,7 +66,7 @@
                         </StackPanel>
                     </Label.Content>
                 </Label>
-                <Label BorderThickness="0, 0, 0, .5" BorderBrush="{StaticResource BorderColor}">
+                <Label BorderThickness="0, 0, 0, .5" BorderBrush="{StaticResource GrayPrimary}">
                     <Label.Content>
                         <StackPanel Orientation="Horizontal">
                             <Label FontSize="11">作者:</Label>
@@ -74,7 +74,7 @@
                         </StackPanel>
                     </Label.Content>
                 </Label>
-                <Label BorderThickness="0, 0, 0, .5" BorderBrush="{StaticResource BorderColor}">
+                <Label BorderThickness="0, 0, 0, .5" BorderBrush="{StaticResource GrayPrimary}">
                     <Label.Content>
                         <StackPanel Orientation="Horizontal">
                             <Label FontSize="11">註解:</Label>

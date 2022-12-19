@@ -33,7 +33,7 @@ namespace Google_Drive_Organizer_V3.Classes.Display_types
             List<ImageExif> selected_range = new List<ImageExif>();
             try
             {
-                selected_range = input_items.GetRange(page * ApplicationVariables.PageSize, (page + 1) * ApplicationVariables.PageSize);
+                selected_range = input_items.GetRange(page * ApplicationVariables.PageSize, ApplicationVariables.PageSize);
             }
             catch (ArgumentException)
             {

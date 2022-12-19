@@ -43,14 +43,22 @@ namespace Google_Drive_Organizer_V3.Classes
                 {
                     using (StreamReader read = process.StandardOutput)
                     {
-                        dictionary = read.ReadToEnd().ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList().Distinct().ToDictionary(x => x.Substring(0, x.IndexOf(':')).Trim(), x => x.Substring(x.IndexOf('[') + 1, Math.Abs(x.IndexOf('[') - x.IndexOf(']') + 1)).Trim());
+
+                        try
+                        {
+                            dictionary = read.ReadToEnd().ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList().Distinct().ToDictionary(x => x.Substring(0, x.IndexOf(':')).Trim(), x => x.Substring(x.IndexOf('[') + 1, Math.Abs(x.IndexOf('[') - x.IndexOf(']') + 1)).Trim());
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Caught the same key");
+                        }
                     }
                 }
             });
             return dictionary;
         }
 
-        public static async Task<ImageExif> LoadImageInfo_Async(MatchItem_Class input_item, CancellationToken cancellationToken)
+        public static async Task<ImageExif> LoadImageInfo_Async(MatchItem_Class input_item)
         {
             ImageExif detail = new ImageExif();
             Dictionary<string, string> exif_dictionary = await ExtractEXIFDataFrom_GetEXIF_Script(input_item.ImagePath);
@@ -75,36 +83,40 @@ namespace Google_Drive_Organizer_V3.Classes
             return detail;
         }
 
-        public static async Task<List<ImageExif>> LoadImageInfo_Record(List<MatchItem_Class> matches_input, CancellationToken ct, IProgress<LoadEXIFRecord_ProgressReportModule> progress)
+        public static async Task<List<ImageExif>> LoadImageInfo_Record(List<MatchItem_Class> matches_input, IProgress<LoadEXIFRecord_ProgressReportModule> progress)
         {
-            List<ImageExif> ImageExif = new List<ImageExif>();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            List<ImageExif> ImageExifs = new List<ImageExif>();
             foreach (MatchItem_Class item in matches_input)
             {
-                ImageExif exif = await LoadImageInfo_Async(item, ct);
-                ImageExif.Add(exif);
+                ImageExif exif = await LoadImageInfo_Async(item);
+                ImageExifs.Add(exif);
                 LoadEXIFRecord_ProgressReportModule CurrentProgress = new LoadEXIFRecord_ProgressReportModule()
                 {
-                    CurrentItem = ImageExif.Count,
+                    CurrentItem = ImageExifs.Count,
                     EXIFData = exif,
                     TotalItems = matches_input.Count - 1,
                 };
                 progress.Report(CurrentProgress);
             }
-            return ImageExif;
+            stopwatch.Stop();
+            Console.WriteLine(String.Format("Total timespan on loading {0}", stopwatch.Elapsed.TotalSeconds));
+            return ImageExifs;
         }
-        public static async Task<List<ImageExif>> SortResult(List<ImageExif> inputs, SortManner sortManner, SortType sortType)
+        public static async Task<List<ImageExif>> SortResult(List<ImageExif> inputs, SortManner sortManner, SortTypes sortType)
         {
             List<ImageExif> sorted = new List<ImageExif>();
             switch (sortType)
             {
-                case SortType.拍攝日期:
+                case SortTypes.拍攝日期:
                     await Task.Run(() => inputs.Sort(SortByDate));
                     if (sortManner == SortManner.遞減)
                     {
                         inputs.Reverse();
                     }
                     break;
-                case SortType.檔案名稱:
+                case SortTypes.檔案名稱:
                     await Task.Run(() => inputs.Sort(SortByFileName));
                     if (sortManner == SortManner.遞減)
                     {
@@ -231,7 +243,7 @@ namespace Google_Drive_Organizer_V3.Classes
         Month,
         Day,
     }
-    public enum SortType
+    public enum SortTypes
     {
         檔案名稱,
         拍攝日期

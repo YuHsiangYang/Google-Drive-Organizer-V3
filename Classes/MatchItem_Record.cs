@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using System.IO;
 using Google_Drive_Organizer_V3.Pages.MatchItem;
 using System.Diagnostics;
+using Google_Drive_Organizer_V3.Pages.SelectFolder;
 
 namespace Google_Drive_Organizer_V3
 {
     public static class MatchItem_Record
     {
         public static List<MatchItem_Class> Matched_Items { get; set; } = new List<MatchItem_Class>();
-        public static async Task<List<MatchItem_Class>> LoadMatch(List<FolderRecordItem> folder_locations, IProgress<LoadEXIFRecord_ProgressReportModule> progression, CancellationToken cancellationToken)
+        public static async Task<List<MatchItem_Class>> LoadMatch(List<Folder_Item> folder_locations, IProgress<LoadEXIFRecord_ProgressReportModule> progression)
         {
             List<MatchItem_Class> Matches = new List<MatchItem_Class>();
             try
@@ -25,10 +26,8 @@ namespace Google_Drive_Organizer_V3
                 List<string> Images_Name = new List<string>();
                 foreach (var item in folder_locations)
                 {
-                    cancellationToken.ThrowIfCancellationRequested();
-                    Jsons_FullPath.AddRange(await Task.Run(() => Directory.GetFiles(item.FolderLocation, "*.json", SearchOption.AllDirectories).ToList()));
-                    Images_FullPath.AddRange(await Task.Run(() => Directory.GetFiles(item.FolderLocation, "*.*", SearchOption.AllDirectories).Where(file => file.EndsWith(".jpeg") || file.EndsWith(".jpg")).ToList()));
-                    cancellationToken.ThrowIfCancellationRequested();
+                    Jsons_FullPath.AddRange(await Task.Run(() => Directory.GetFiles(item.FolderPath, "*.json", SearchOption.AllDirectories).ToList()));
+                    Images_FullPath.AddRange(await Task.Run(() => Directory.GetFiles(item.FolderPath, "*.*", SearchOption.AllDirectories).Where(file => file.EndsWith(".jpeg") || file.EndsWith(".jpg")).ToList()));
                 }
                 Jsons_FullPath.ForEach(item =>
                 Jsons_Name.Add(Path.GetFileName(item))

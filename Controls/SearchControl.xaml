@@ -4,14 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Google_Drive_Organizer_V3.Controls"
+             xmlns:syswin="clr-namespace:System.Windows;assembly=PresentationCore"
+             
              mc:Ignorable="d" 
              d:DesignHeight="40" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/ApplicationResources.xaml"/>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ComboBox x:Name="SearchType" Margin="5" SelectionChanged="SearchType_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <ComboBox Style="{DynamicResource CustoCombobox}" x:Name="SearchType" Margin="5" SelectionChanged="SearchType_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{Binding Mode=OneWay, Source={StaticResource ColorPrimary}}"/>
         <Grid Name="SearchControlGrid" Grid.Column="1" Margin="5">
         </Grid>
     </Grid>
