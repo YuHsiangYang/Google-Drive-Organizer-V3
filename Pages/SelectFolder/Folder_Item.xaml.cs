@@ -58,7 +58,7 @@ namespace Google_Drive_Organizer_V3.Pages.SelectFolder
 
         private void Delete_Icon_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("是否要取消選取 '" + new DirectoryInfo(FolderPath).Name + "'", "警告", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to deselect '" + new DirectoryInfo(FolderPath).Name + "'?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
                 //執行取消選取動作

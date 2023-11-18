@@ -20,7 +20,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Name="Go_Previous" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="上一步" Padding="10" Background="{StaticResource ColorPrimary}" extension:ButtonCustomProperties.CornerRadius="{StaticResource corner_radius_Double}" Click="StageButtons_Click" BorderBrush="{x:Null}" Foreground="White"/>
-        <Button Name="Go_Next" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Content="下一步" Padding="10" Background="{StaticResource ColorPrimary}" extension:ButtonCustomProperties.CornerRadius="{StaticResource corner_radius_Double}" Click="StageButtons_Click" BorderBrush="{x:Null}" Foreground="White"/>
+        <Button Name="Go_Previous" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Previous Step" Padding="10" Background="{StaticResource ColorPrimary}" extension:ButtonCustomProperties.CornerRadius="{StaticResource corner_radius_Double}" Click="StageButtons_Click" BorderBrush="{x:Null}" Foreground="White"/>
+        <Button Name="Go_Next" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Next Step" Padding="10" Background="{StaticResource ColorPrimary}" extension:ButtonCustomProperties.CornerRadius="{StaticResource corner_radius_Double}" Click="StageButtons_Click" BorderBrush="{x:Null}" Foreground="White"/>
     </Grid>
 </UserControl>

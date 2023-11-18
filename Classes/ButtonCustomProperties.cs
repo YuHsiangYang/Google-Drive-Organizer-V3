@@ -24,6 +24,7 @@ namespace Google_Drive_Organizer_V3
             return (double)target.GetValue(Corner_Radius);
         }
 
+        //A custom property setter. This is to give the buttons a corner radius.
         public static void SetCornerRadius(Button target, double value)
         {
             target.SetValue(Corner_Radius, value);
@@ -35,20 +36,6 @@ namespace Google_Drive_Organizer_V3
             front.CornerRadius = new CornerRadius(value);
             border.CornerRadius = new CornerRadius(value);
             mainborder.CornerRadius = new CornerRadius(value);
-            target.ApplyTemplate();
-            target.UpdateDefaultStyle();
-            target.UpdateLayout();
-        }
-        public static Color GetHoverColor(Button target)
-        {
-            return (Color)target.GetValue(HoverColor);
-        }
-        public static void SetHoverColor(Button target, Color value)
-        {
-            target.SetValue(HoverColor, value);
-            target.ApplyTemplate();
-            Border front = (Border)target.Template.FindName("Front", target);
-            front.Background = new SolidColorBrush(value);
             target.ApplyTemplate();
             target.UpdateDefaultStyle();
             target.UpdateLayout();

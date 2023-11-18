@@ -37,6 +37,6 @@
         <Grid x:Name="ClearSearch_PlaceHolder" Grid.Column="1" Margin="5, 0, 5, 0"></Grid>
         <TextBox Style="{DynamicResource CustomTextBox}" Name="Input" TextWrapping="Wrap" Text="" TextChanged="Input_TextChanged" KeyDown="Input_KeyDown" />
         <!--<Button Content="搜尋" Cursor="Hand" x:Name="Search" Margin="10, 0, 0, 0" Click="Search_Click" VerticalAlignment="Center" Grid.Column="1" Height="24" Width="52" BorderBrush="{x:Null}" extension:ButtonCustomProperties.CornerRadius="4" Padding="4"/>-->
-        <Button Grid.Column="2" Content="搜尋" extension:ButtonCustomProperties.CornerRadius="{StaticResource corner_radius_Double}" Name="Search" Click="Search_Click" BorderBrush="{x:Null}" Background="{StaticResource ColorPrimary}" Foreground="{StaticResource ColorSecondary}"></Button>
+        <Button Grid.Column="2" Content="Search" extension:ButtonCustomProperties.CornerRadius="{StaticResource corner_radius_Double}" Name="Search" Click="Search_Click" BorderBrush="{x:Null}" Background="{StaticResource ColorPrimary}" Foreground="{StaticResource ColorSecondary}"></Button>
     </Grid>
 </UserControl>

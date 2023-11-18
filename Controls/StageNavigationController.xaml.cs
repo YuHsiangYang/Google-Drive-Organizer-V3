@@ -69,7 +69,6 @@ namespace Google_Drive_Organizer_V3.Pages
                     await Task.Delay(TimeSpan.FromSeconds(0.2));
                     Go_Next.Visibility = Visibility.Hidden;
                     break;
-                //^=
                 default:
                     break;
             }

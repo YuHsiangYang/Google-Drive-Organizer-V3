@@ -54,7 +54,7 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem.Display_types
                 image_brush.ImageSource = image;
                 image_brush.Stretch = Stretch.Uniform;
                 DisplayImage.Background = image_brush;
-                ImageFileName.Content = "錯誤";
+                ImageFileName.Content = "Error";
             }
         }
 

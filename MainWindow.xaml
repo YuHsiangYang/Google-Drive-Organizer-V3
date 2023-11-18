@@ -4,9 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Google_Drive_Organizer_V3"
-        xmlns:Pages="clr-namespace:Google_Drive_Organizer_V3.Pages" xmlns:Controls="clr-namespace:Google_Drive_Organizer_V3.Controls" x:Class="Google_Drive_Organizer_V3.MainWindow"
+        xmlns:Pages="clr-namespace:Google_Drive_Organizer_V3.Pages" xmlns:Controls="clr-namespace:Google_Drive_Organizer_V3.Controls" x:Class="Google_Drive_Organizer_V3.GoogleDriveOrganizer_MainUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="441" Width="667" MinHeight="620" MinWidth="667">
+        Title="Google Drive Organizer" Height="441" Width="667" MinHeight="620" MinWidth="667">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

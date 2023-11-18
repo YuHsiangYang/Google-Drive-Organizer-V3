@@ -21,24 +21,26 @@ namespace Google_Drive_Organizer_V3.Controls
     public partial class DisplayPages_Control : UserControl
     {
         //Items per page = 30
-        int pages = 0;
-        public event EventHandler<int> PageChanged;
+        int total_pages = 0;//This is the inital value of the total pages.
+        public event EventHandler<int> PageChanged;//This event will need to be catched by the parent container
         public DisplayPages_Control()
         {
             InitializeComponent();
         }
         public void LoadRange(int quantities)
         {
-            if ((int)Math.Ceiling((double)quantities / ApplicationVariables.PageSize) > pages)
+            ///This method is to load the page navigation buttons based on the specified number of images per page.
+            ///When the number of images exceed the limit, the remaining images will be displayed on the next page.
+            if ((int)Math.Ceiling((double)quantities / ApplicationVariables.PageSize) > total_pages)
             {
-                PagesPanel.Children.Clear();
-                pages = (int)Math.Ceiling((double)quantities / ApplicationVariables.PageSize);
-                for (int i = 0; i < pages; i++)
+                PagesPanel.Children.Clear();//Clear all the images on the page
+                total_pages = (int)Math.Ceiling((double)quantities / ApplicationVariables.PageSize);//Get the total number of pages needed by rounding up
+                for (int current_page = 0; current_page < total_pages; current_page++)
                 {
                     
                     Button PageBTN = new Button()
                     {
-                        Content = i +1 ,
+                        Content = current_page +1 ,
                         Width = 20,
                         Height = 20,
                         Margin = new Thickness(2.5),
@@ -50,7 +52,6 @@ namespace Google_Drive_Organizer_V3.Controls
                     {
                         Child = PageBTN,
                     };
-
                     PageBTN.Click += PageBTN_Click;
                     ButtonCustomProperties.SetCornerRadius(PageBTN, PageBTN.Width / 2);
                     PagesPanel.Children.Add(BTNViewbox);
@@ -63,8 +64,8 @@ namespace Google_Drive_Organizer_V3.Controls
         private void PageBTN_Click(object sender, RoutedEventArgs e)
         {
             int page = (int)((Button)sender).Content;
-            ApplicationVariables.PageNumber = page-1;
-            PageChanged?.Invoke(this, page);
+            ApplicationVariables.PageNumber = page-1;//The minus one is to fit the indexing of the record. The record is 0-based.
+            PageChanged?.Invoke(this, page); //Trigger the page change event.
         }
     }
 }

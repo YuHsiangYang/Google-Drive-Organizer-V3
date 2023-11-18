@@ -181,7 +181,6 @@
     <Compile Include="Classes\MatchingProgress_Report.cs" />
     <Compile Include="Classes\ImageInformation\ImageEXIF\ImageExif.cs" />
     <Compile Include="Classes\ImageInformation\ImageInfo_Functions.cs" />
-    <Compile Include="Classes\LoadImageDetail_ProgressModule.cs" />
     <Compile Include="Controls\Display types\DisplayByIcon\Match_Display_Icon.xaml.cs">
       <DependentUpon>Match_Display_Icon.xaml</DependentUpon>
     </Compile>
@@ -197,6 +196,7 @@
     </Compile>
     <Compile Include="Scripts\GlobalScripts.cs" />
     <Compile Include="ApplicationVariables.cs" />
+    <Compile Include="Scripts\ModifyEXIFData.cs" />
     <Compile Include="Settings.cs" />
     <Page Include="ApplicationResources.xaml">
       <SubType>Designer</SubType>
@@ -409,15 +409,12 @@
     <Content Include="Scripts\GetEXIF.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\Modify.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\Read_EXIF.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Functions\Functions.csproj">
-      <Project>{61516efd-c668-4fad-a397-c5214a43dd58}</Project>
-      <Name>Functions</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

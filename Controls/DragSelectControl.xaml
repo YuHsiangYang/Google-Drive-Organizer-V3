@@ -48,7 +48,7 @@
                         <TranslateTransform>
                         </TranslateTransform>
                     </Viewbox.RenderTransform>
-                    <Label Content="請將資料夾拖曳至此" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" />
+                    <Label Content="Drag folder here" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" />
                 </Viewbox>
             </Grid>
         </Viewbox>

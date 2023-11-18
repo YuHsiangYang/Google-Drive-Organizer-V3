@@ -73,18 +73,18 @@
 
         <Viewbox Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left">
             <StackPanel>
-                <Label x:Name="FolderName" Content="分析中"></Label>
+                <Label x:Name="FolderName" Content="Analyzing"></Label>
             </StackPanel>
         </Viewbox>
         <Viewbox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left">
             <StackPanel Orientation="Horizontal">
-                <Label Content="Json:"/>
+                <Label Content="JSON:"/>
                 <Label x:Name="JsonCount_Label" Content=""/>
             </StackPanel>
         </Viewbox>
         <Viewbox Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left">
             <StackPanel Orientation="Horizontal">
-                <Label Content="圖片:"/>
+                <Label Content="Images:"/>
                 <Label x:Name="ImageCount_Label" Content=""/>
             </StackPanel>
         </Viewbox>

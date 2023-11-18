@@ -54,7 +54,7 @@ namespace Google_Drive_Organizer_V3.Pages
             }
             if (invalid_import.Count > 0)
             {
-                MessageBox.Show("無法添加 " + Environment.NewLine + message + "因為" + (invalid_import.Count > 1 ? "它們" : "它") + "不是資料夾", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Cannot add " + Environment.NewLine + message + "because" + (invalid_import.Count > 1 ? "they are " : "it is ") + "not a directory", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             ImportFolders(valid_imports);
             DragTrigger_Grid_DragLeave(sender, e);
@@ -132,8 +132,8 @@ namespace Google_Drive_Organizer_V3.Pages
                 }
                 else
                 {
-                    MessageBox.Show("已經添加過 '" + new DirectoryInfo(path).Name + "' 。", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    Console.WriteLine("找到資料");
+                    MessageBox.Show("Already added '" + new DirectoryInfo(path).Name + "' before", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    Console.WriteLine("Find existing directory");
                 }
             }
         }

@@ -26,7 +26,7 @@ namespace Google_Drive_Organizer_V3.Controls
         {
             InitializeComponent();
         }
-        public SortManner current_manner = SortManner.遞增;
+        public SortManner current_manner = SortManner.Ascending;
         public event EventHandler<SortManner> SortMannerChanged_Event;
         // left side should be negative and right side should be positive
         public void ExpandArrows(RotateTransform left, RotateTransform right, TimeSpan duration)
@@ -54,17 +54,17 @@ namespace Google_Drive_Organizer_V3.Controls
             TimeSpan animation_duration = TimeSpan.FromSeconds(0.1); ;
             switch (current_manner)
             {
-                case SortManner.遞增:
+                case SortManner.Ascending:
                     CollapseArrows(Rotate_UpperArrowLeft, Rotate_UpperArrowRight, animation_duration);
 
                     ExpandArrows(Rotate_LowerArrowLeft, Rotate_LowerArrowRight, animation_duration);
-                    current_manner = SortManner.遞減;
+                    current_manner = SortManner.Descending;
                     break;
-                case SortManner.遞減:
+                case SortManner.Descending:
                     CollapseArrows(Rotate_LowerArrowLeft, Rotate_LowerArrowRight, animation_duration);
 
                     ExpandArrows(Rotate_UpperArrowLeft, Rotate_UpperArrowRight, animation_duration);
-                    current_manner = SortManner.遞增;
+                    current_manner = SortManner.Ascending;
                     break;
                 default:
                     break;

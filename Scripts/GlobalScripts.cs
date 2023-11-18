@@ -17,13 +17,17 @@ namespace Google_Drive_Organizer_V3
     public static class GlobalScripts
     {
         private static double scale_ratio = .75;
+
+        //To make the element disappear by using scale and transparency
         public static void Disappear_Element(UIElement uIElement, Duration animation_duration)
         {
             DoubleAnimation disappear_scale = new DoubleAnimation(1, scale_ratio, animation_duration);
             DoubleAnimation disappear_opacity = new DoubleAnimation(1, 0, animation_duration);
             ScaleTransform transform = new ScaleTransform();
-            uIElement.RenderTransform = transform;
-            uIElement.RenderTransformOrigin = new Point(0.5, 0.5);
+            uIElement.RenderTransform = transform; //Turn the transform into a property that can be animated
+            uIElement.RenderTransformOrigin = new Point(0.5, 0.5); //Sets the Trnasform origin (pivot point of the scale animation)
+
+            //Begin the animation.
             transform.BeginAnimation(ScaleTransform.ScaleXProperty, disappear_scale);
             transform.BeginAnimation(ScaleTransform.ScaleYProperty, disappear_scale);
             uIElement.BeginAnimation(UIElement.OpacityProperty, disappear_opacity);
@@ -39,12 +43,13 @@ namespace Google_Drive_Organizer_V3
             transform.BeginAnimation(ScaleTransform.ScaleYProperty, appear_scale);
             uIElement.BeginAnimation(UIElement.OpacityProperty, appear_opacity);
         }
-
-        private static async void SwipeGeneric(UIElement uIElement, Duration duration, SwipeDirection direction, bool to_origin)
+        //Swipe the chosen control to switch to another. This is for animation purpose
+        private static void SwipeGeneric(UIElement uIElement, Duration duration, SwipeDirection direction, bool to_origin)
         {
             double displacement = 20;
-            displacement = direction == SwipeDirection.LeftToRight ? displacement : -displacement;
+            displacement = direction == SwipeDirection.LeftToRight ? displacement : -displacement; //Sets the displacement to either to the right or to the left.
             DoubleAnimation displacement_animation = new DoubleAnimation(displacement, duration);
+            //Checks if it is from the other place to the origin or from the origin to the other place.
             if (to_origin)
             {
                 displacement_animation.From = displacement;
@@ -52,13 +57,9 @@ namespace Google_Drive_Organizer_V3
             }
 
 
-
-
             TranslateTransform translateTransform = new TranslateTransform();
             uIElement.RenderTransform = translateTransform;
             translateTransform.BeginAnimation(TranslateTransform.XProperty, displacement_animation);
-            //await Task.Delay(duration.TimeSpan - TimeSpan.FromMilliseconds(10));
-            //uIElement.RenderTransform = new TranslateTransform();
         }
         public static void SwipeTransition(UIElement uIElement, Duration duration, SwipeDirection direction, TransitionType transitionType)
         {

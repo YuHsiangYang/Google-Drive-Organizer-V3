@@ -20,9 +20,9 @@ namespace Google_Drive_Organizer_V3
     /// <summary>
     /// MainWindow.xaml 的互動邏輯
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GoogleDriveOrganizer_MainUI : Window
     {
-        public MainWindow()
+        public GoogleDriveOrganizer_MainUI()
         {
             InitializeComponent();
             MainWindow_Grid.Children.Clear();

@@ -109,16 +109,16 @@ namespace Google_Drive_Organizer_V3.Classes
             List<ImageExif> sorted = new List<ImageExif>();
             switch (sortType)
             {
-                case SortTypes.拍攝日期:
+                case SortTypes.DateTaken:
                     await Task.Run(() => inputs.Sort(SortByDate));
-                    if (sortManner == SortManner.遞減)
+                    if (sortManner == SortManner.Descending)
                     {
                         inputs.Reverse();
                     }
                     break;
-                case SortTypes.檔案名稱:
+                case SortTypes.FileName:
                     await Task.Run(() => inputs.Sort(SortByFileName));
-                    if (sortManner == SortManner.遞減)
+                    if (sortManner == SortManner.Descending)
                     {
                         inputs.Reverse();
                     }
@@ -236,6 +236,11 @@ namespace Google_Drive_Organizer_V3.Classes
 
             return output;
         }
+        public static double DMS_To_Double(Dictionary<string, double> input)
+        {
+            double output = input["d"] + input["m"]  / 60 + input["s"] / 3600;
+            return output;
+        }
     }
     public enum DateTypes
     {
@@ -245,12 +250,12 @@ namespace Google_Drive_Organizer_V3.Classes
     }
     public enum SortTypes
     {
-        檔案名稱,
-        拍攝日期
+        FileName,
+        DateTaken
     }
     public enum SortManner
     {
-        遞增,
-        遞減
+        Ascending,
+        Descending
     }
 }

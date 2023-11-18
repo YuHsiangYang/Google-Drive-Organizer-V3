@@ -54,7 +54,7 @@
                     <TranslateTransform x:Name="StackPanel_Transform"/>
                 </StackPanel.RenderTransform>
                 <Viewbox HorizontalAlignment="Center" Height="70">
-                    <Button x:Name="Select_Folder_Btn" Cursor="Hand" Height="40" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Content="選取資料夾" Click="Select_Folder_Btn_Click" BorderBrush="{x:Null}" extension:ButtonCustomProperties.CornerRadius="7" Foreground="White" Background="{StaticResource ColorPrimary}">
+                    <Button x:Name="Select_Folder_Btn" Cursor="Hand" Height="40" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Select folder" Click="Select_Folder_Btn_Click" BorderBrush="{x:Null}" extension:ButtonCustomProperties.CornerRadius="7" Foreground="White" Background="{StaticResource ColorPrimary}">
                         <!--<Button.Triggers>
                             <EventTrigger RoutedEvent="MouseEnter">
                                 <BeginStoryboard>

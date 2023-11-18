@@ -32,8 +32,8 @@ namespace Google_Drive_Organizer_V3.Controls
 
         private enum SearchTypes
         {
-            檔案名稱,
-            拍攝日期,
+            FileName,
+            DateTaken,
         }
         public SearchControl()
         {
@@ -71,10 +71,10 @@ namespace Google_Drive_Organizer_V3.Controls
             TimeSpan AnimationDuration = TimeSpan.FromSeconds(.2);
             switch (selected)
             {
-                case SearchTypes.拍攝日期:
+                case SearchTypes.DateTaken:
                     await SwitchElement(Search_By_FileName, Search_By_PhotoTakenTime, AnimationDuration);
                     break;
-                case SearchTypes.檔案名稱:
+                case SearchTypes.FileName:
                     await SwitchElement(Search_By_PhotoTakenTime, Search_By_FileName, AnimationDuration);
                     break;
                 default:
