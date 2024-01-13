@@ -113,7 +113,7 @@ This program is intended to solve the issues with the downloaded images. When th
 
 This project outline was moved from my notion notebook. Link: [Program Design](https://yuhsiangnote.notion.site/Program-Design-23abb37d5e8e40369b7f80a4edff40e6?pvs=4) or https://yuhsiangnote.notion.site/Program-Design-23abb37d5e8e40369b7f80a4edff40e6?pvs=4
 
-# Accreditations
+# References
 ### icons used in my app:
 
 <a href="https://www.flaticon.com/free-icons/image" title="image icons">Image icons created by Pixel perfect - Flaticon</a>
