@@ -27,8 +27,9 @@ namespace Google_Drive_Organizer_V3.Controls.ImageContentViewers
         }
         public System.Windows.Controls.Button Apply { get; set; } = new System.Windows.Controls.Button()
         {
-            Content = "套用"
+            Content = "Apply"
         };
+
         private void CalanderControl_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!CalanderPopup.IsOpen)

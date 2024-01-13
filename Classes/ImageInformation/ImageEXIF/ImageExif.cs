@@ -8,6 +8,7 @@ using System.Windows.Diagnostics;
 
 namespace Google_Drive_Organizer_V3.Classes
 {
+    //This is the class to store the EXIF data retrieved from the script.
     public class ImageExif
     {
         public ImageJsonData JsonData = new ImageJsonData();

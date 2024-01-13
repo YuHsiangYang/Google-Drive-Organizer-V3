@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 namespace Google_Drive_Organizer_V3.Controls.SortController
 {
     /// <summary>
-    /// Interaction logic for SortTypes.xaml
+    /// Controlles the sorting type of the images (by file name or photo taken date)
     /// </summary>
     public partial class MainSortController : UserControl
     {

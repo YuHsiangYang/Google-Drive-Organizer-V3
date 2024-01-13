@@ -18,7 +18,7 @@ using System.Windows.Shapes;
 namespace Google_Drive_Organizer_V3.Controls
 {
     /// <summary>
-    /// SortMannerControl.xaml 的互動邏輯
+    /// The controller for the sorting manner (ascending or descending)
     /// </summary>
     public partial class SortMannerControl : UserControl
     {
@@ -28,18 +28,25 @@ namespace Google_Drive_Organizer_V3.Controls
         }
         public SortManner current_manner = SortManner.Ascending;
         public event EventHandler<SortManner> SortMannerChanged_Event;
-        // left side should be negative and right side should be positive
+        
+        //Expand the arrow
         public void ExpandArrows(RotateTransform left, RotateTransform right, TimeSpan duration)
         {
             double to_value = 45;
             //Animation for left element
-            DoubleAnimation animation_left = new DoubleAnimation(-to_value, duration);
+            DoubleAnimation animation_left = new DoubleAnimation(-to_value, duration);// left side should be negative and right side should be positive
             left.BeginAnimation(RotateTransform.AngleProperty, animation_left);
 
             //animation for right element
             DoubleAnimation animation_right = new DoubleAnimation(to_value, duration);
             right.BeginAnimation(RotateTransform.AngleProperty, animation_right);
         }
+        /// <summary>
+        /// Collaps the arrow as the sorting manner changes.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="duration"></param>
         public void CollapseArrows(RotateTransform left, RotateTransform right, TimeSpan duration)
         {
             //to 0
@@ -49,6 +56,7 @@ namespace Google_Drive_Organizer_V3.Controls
             right.BeginAnimation(RotateTransform.AngleProperty, animation);
         }
 
+        //The trigger for changing the sorting manner.
         private void trigger_Click(object sender, RoutedEventArgs e)
         {
             TimeSpan animation_duration = TimeSpan.FromSeconds(0.1); ;

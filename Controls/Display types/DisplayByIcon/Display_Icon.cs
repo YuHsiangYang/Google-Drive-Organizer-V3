@@ -29,19 +29,20 @@ namespace Google_Drive_Organizer_V3.Classes.Display_types
 
         public void ShowPage(int page, List<ImageExif> input_items)
         {
-            ((WrapPanel)Panel).Children.Clear();
+            //Display the images using the page number
+            ((WrapPanel)Panel).Children.Clear(); //Clear all the children first.
             List<ImageExif> selected_range = new List<ImageExif>();
             try
             {
-                selected_range = input_items.GetRange(page * ApplicationVariables.PageSize, ApplicationVariables.PageSize);
+                selected_range = input_items.GetRange(page * ApplicationVariables.PageSize, ApplicationVariables.PageSize); //Select the range using the page size and the page number
             }
             catch (ArgumentException)
             {
-                selected_range = input_items.GetRange(page * ApplicationVariables.PageSize, input_items.Count - page * ApplicationVariables.PageSize);
+                selected_range = input_items.GetRange(page * ApplicationVariables.PageSize, input_items.Count - page * ApplicationVariables.PageSize); //The last page, when the number of images is not enough.
             }
-            foreach (ImageExif children_item in selected_range)
+            foreach (ImageExif children_item in selected_range) //Display all the items using the foreach loop
             {
-                ((WrapPanel)Panel).Children.Add(new Match_Display_Icon(children_item));
+                ((WrapPanel)Panel).Children.Add(new Match_Display_Icon(children_item)); 
             }
         }
     }

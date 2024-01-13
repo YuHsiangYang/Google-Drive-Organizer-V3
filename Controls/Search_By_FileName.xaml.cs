@@ -55,7 +55,7 @@ namespace Google_Drive_Organizer_V3.Controls
             HorizontalAlignment = HorizontalAlignment.Stretch,
             VerticalAlignment = VerticalAlignment.Stretch,
             Margin = new Thickness(0),
-            Content = "清除搜尋",
+            Content = "Clear search contents",
             Width = 70,
             Cursor = Cursors.Hand,
             BorderBrush = null,

@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 namespace Google_Drive_Organizer_V3.Controls
 {
     /// <summary>
-    /// CircleSwitch.xaml 的互動邏輯
+    /// This is a custom component to be used for switching things.
     /// </summary>
     public partial class CircleSwitch : UserControl
     {

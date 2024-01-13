@@ -67,7 +67,7 @@ namespace Google_Drive_Organizer_V3.Controls
         public ImageExif EXIF { get; set; }
         public System.Windows.Controls.Button Apply { get; set; } = new System.Windows.Controls.Button()
         {
-            Content = "套用"
+            Content = "Apply"
         };
         public void DisplayImage(object activator, ImageExif exif)
         {
@@ -90,14 +90,6 @@ namespace Google_Drive_Organizer_V3.Controls
             //Load the exif
             EXIFViewer.DisplayEXIF(activator);
             caller = activator as Match_Display_Icon; //Sets the caller of the method
-        }
-
-        private void PhtoTakenTime_CalendarClosed(object sender, RoutedEventArgs e)
-        {
-        }
-        private void ShowApplyButton()
-        {
-
         }
 
         private void RowSplitter_DragCompleted(object sender, DragCompletedEventArgs e)

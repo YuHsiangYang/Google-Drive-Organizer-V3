@@ -20,7 +20,7 @@ namespace Google_Drive_Organizer_V3
             ImageCount = image_count;
         }
         public string FolderLocation { get; set; }
-        public string MD5 { get; set; }
+        public string MD5 { get; set; } //This feature has been removed to improve performance.
         public int JsonCount { get; set; }
         public int ImageCount { get; set; }
     }

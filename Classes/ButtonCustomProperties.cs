@@ -17,7 +17,7 @@ namespace Google_Drive_Organizer_V3
         public static readonly DependencyProperty HoverColor = DependencyProperty.Register("Hover Color", typeof(Color), typeof(ButtonCustomProperties));
         public static ResourceDictionary resourceDictionary { get; set; } = new ResourceDictionary()
         {
-            Source = new Uri(@"pack://application:,,,/ApplicationResources.xaml", UriKind.Absolute),
+            Source = new Uri(@"pack://application:,,,/ApplicationResources.xaml", UriKind.Absolute), //Reference the resources to the dynamic resource dictionary.
         };
         public static double GetCornerRadius(Button target)
         {
@@ -28,8 +28,8 @@ namespace Google_Drive_Organizer_V3
         public static void SetCornerRadius(Button target, double value)
         {
             target.SetValue(Corner_Radius, value);
-            target.Template = resourceDictionary["CustomButtonTemplate"] as ControlTemplate;
-            target.ApplyTemplate();
+            target.Template = resourceDictionary["CustomButtonTemplate"] as ControlTemplate; //Get template from the rescource dictionary.
+            target.ApplyTemplate(); //Apply so that the below custom compoenents (front, border, mainborder) can be set.
             Border front = (Border)target.Template.FindName("Front", target);
             Border border = (Border)target.Template.FindName("border", target);
             Border mainborder = (Border)target.Template.FindName("MainBorder", target);

@@ -5,8 +5,6 @@ VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google Photo Organizer v3", "Google Photo Organizer v3.csproj", "{AE10957E-E3D0-4A0C-87DB-D528B259FA3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unittests", "..\Unittests\Unittests.csproj", "{80B47D6E-D963-4DB2-87BC-EEE7316E23F5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{AE10957E-E3D0-4A0C-87DB-D528B259FA3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE10957E-E3D0-4A0C-87DB-D528B259FA3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE10957E-E3D0-4A0C-87DB-D528B259FA3F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{80B47D6E-D963-4DB2-87BC-EEE7316E23F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{80B47D6E-D963-4DB2-87BC-EEE7316E23F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{80B47D6E-D963-4DB2-87BC-EEE7316E23F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{80B47D6E-D963-4DB2-87BC-EEE7316E23F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

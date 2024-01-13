@@ -19,7 +19,6 @@ namespace Google_Drive_Organizer_V3
             List<MatchItem_Class> Matches = new List<MatchItem_Class>();
             try
             {
-                //Matched_Items.Clear();
                 List<string> Jsons_FullPath = new List<string>();
                 List<string> Images_FullPath = new List<string>();
                 List<string> Jsons_Name = new List<string>();
@@ -33,11 +32,9 @@ namespace Google_Drive_Organizer_V3
                 Jsons_Name.Add(Path.GetFileName(item))
                 );
                 Images_FullPath.ForEach(item => Images_Name.Add(Path.GetFileName(item)));
-                //Images = await Task.Run(() => Directory.GetFiles(folder_location, "*.*", SearchOption.AllDirectories).Where(file => file.EndsWith(".jpeg") || file.EndsWith(".jpg")).ToList());
                 List<Task> match_process_parallel = new List<Task>();
                 Action<object> find_name_action = delegate(object input){
                     string image = Images_FullPath.Find(x => x.Contains(input.ToString().Substring(0, input.ToString().Length - 5)));//substring the json to image
-                    //Console.WriteLine(json.Substring(0, json.Length - 5));
                     if (image != null)
                     {
                         MatchItem_Class matched = new MatchItem_Class(image, Jsons_FullPath.Find(x => x.Contains(input.ToString())));
@@ -52,20 +49,6 @@ namespace Google_Drive_Organizer_V3
                     }
                 };
                 await Task.Run(() => Parallel.ForEach<string>(Jsons_Name, find_name_action));
-                //foreach (string json in Jsons_Name)
-                //{
-                //    //match_process_parallel.Add(Task.Run(() => find_name_action(json)));
-                //    string image = Images_FullPath.Find(x => x.Contains(json.Substring(0, json.Length - 5)));//substring the json to image
-                //    //Console.WriteLine(json.Substring(0, json.Length - 5));
-                //    if (image != null)
-                //    {
-                //        MatchItem_Class matched = new MatchItem_Class(image, Jsons_FullPath.Find(x => x.Contains(json)));
-                //        Matched_Items.Add(matched);
-                //        //Console.WriteLine(image);
-                //    }
-                //    cancellationToken.ThrowIfCancellationRequested();
-                //}
-                //await Task.WhenAll(match_process_parallel);
                 Matches = Matches.Distinct<MatchItem_Class>().ToList();
             }
             catch (OperationCanceledException ex)

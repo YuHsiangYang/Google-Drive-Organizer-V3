@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 namespace Google_Drive_Organizer_V3.Controls
 {
     /// <summary>
-    /// SearchType_Control.xaml 的互動邏輯
+    /// To search the image in different types (file name or photo taken date)
     /// </summary>
     public partial class SearchControl : UserControl
     {

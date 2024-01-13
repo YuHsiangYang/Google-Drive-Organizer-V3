@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace Google_Drive_Organizer_V3.Controls
 {
     /// <summary>
-    /// Cannot_Find_Search_Result.xaml 的互動邏輯
+    /// Displayed when there is no item found.
     /// </summary>
     public partial class Cannot_Find_Search_Result : UserControl
     {

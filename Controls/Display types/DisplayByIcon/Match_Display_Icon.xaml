@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Google_Drive_Organizer_V3.Pages.MatchItem.Display_types"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="90" Height="100" Width="90" Margin="5" Name="UserControlMainGrid" GotFocus="UserControlMainGrid_GotFocus" LostFocus="UserControlMainGrid_LostFocus">
+             d:DesignHeight="150" d:DesignWidth="100" Height="150" Width="100" Margin="5" Name="UserControlMainGrid" GotFocus="UserControlMainGrid_GotFocus" LostFocus="UserControlMainGrid_LostFocus">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

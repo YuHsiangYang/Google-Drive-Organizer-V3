@@ -15,7 +15,7 @@
                 <ResourceDictionary Source="pack://application:,,,/CustomTextBox.xaml"/>
                 <ResourceDictionary>
                     <Button Grid.Column="2" 
-                        Content="清除搜尋" 
+                        Content="Clear Search Contents" 
                         x:Key="Clear" 
                         Name="Clear" 
                         Width="70" 

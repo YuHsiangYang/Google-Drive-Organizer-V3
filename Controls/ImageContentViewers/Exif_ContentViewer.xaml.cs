@@ -61,7 +61,8 @@ namespace Google_Drive_Organizer_V3.Controls.ImageContentViewers
             }
         }
         /// <summary>
-        /// Use Match_Display_Icon class as input
+        /// Use Match_Display_Icon class as input.
+        /// Display the data by using the EXIF data stored in the record.
         /// </summary>
         /// <param name="sender"></param>
 

@@ -28,6 +28,8 @@ namespace Google_Drive_Organizer_V3.Pages.MatchItem.Display_types
         }
         public ImageExif exif = new ImageExif();
         public bool IsSelected { get; private set; } = false;
+
+        //Called when the component is initialized.
         private void Match_Display_Icon_Initialized(object sender, EventArgs e)
         {
             try

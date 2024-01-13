@@ -84,6 +84,7 @@ namespace Google_Drive_Organizer_V3.Pages
             CheckFolderCount();
         }
 
+        //When the cursor enters the grid area with drop, the original stackpanel will disappear by calling the Disappear_Element function from the GlobalScripts. After making the stack panel disappear, the program will then add the animation guiding the user to drop the folder in that area.
         private async void Drop_Container_DragEnter(object sender, DragEventArgs e)
         {
             GlobalScripts.Disappear_Element(stackPanel, TimeSpan.FromSeconds(.2));

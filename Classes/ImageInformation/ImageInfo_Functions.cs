@@ -15,14 +15,12 @@ namespace Google_Drive_Organizer_V3.Classes
 {
     public static class ImageInfo_Functions
     {
-        static ProcessStartInfo start_info = new ProcessStartInfo
-        {
-            FileName = Path.GetFullPath(@".\Scripts\Read_EXIF.exe"),
-            UseShellExecute = false,
-            RedirectStandardError = true,
-            RedirectStandardOutput = true,
-            CreateNoWindow = true,
-        };
+
+        /// <summary>
+        /// Use the GetEXIF.exe script from "Scripts" to retrieve EXIF data using the image path.
+        /// </summary>
+        /// <param name="imagePath"></param>
+        /// <returns></returns>
 
         public static async Task<Dictionary<string, string>> ExtractEXIFDataFrom_GetEXIF_Script(string imagePath)
         {
@@ -31,10 +29,10 @@ namespace Google_Drive_Organizer_V3.Classes
             ProcessStartInfo exif_script = new ProcessStartInfo()
             {
                 FileName = Path.GetFullPath(@".\Scripts\GetEXIF.exe"),
-                Arguments = string.Format("\"{0}\"", imagePath),
+                Arguments = string.Format("\"{0}\"", imagePath),//Set up the argument
                 UseShellExecute = false,
-                RedirectStandardOutput = true,
-                CreateNoWindow = true,
+                RedirectStandardOutput = true, //Get the output when there when error occurred
+                CreateNoWindow = true, //To prevent the default command-line window.
             };
             ImageExif exif = new ImageExif();
             await Task.Run(async () =>
@@ -50,7 +48,7 @@ namespace Google_Drive_Organizer_V3.Classes
                         }
                         catch (Exception)
                         {
-                            Console.WriteLine("Caught the same key");
+                            Console.WriteLine("Caught the same key"); //When there are two identical keys shown.
                         }
                     }
                 }

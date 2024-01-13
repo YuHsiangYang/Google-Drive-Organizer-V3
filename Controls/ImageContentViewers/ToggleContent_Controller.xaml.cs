@@ -18,16 +18,17 @@ using System.Windows.Shapes;
 namespace Google_Drive_Organizer_V3.Controls.ImageContentViewers
 {
     /// <summary>
-    /// ToggleContent_Controller.xaml 的互動邏輯
+    /// This component is to switch between JSON data and the metadata of the image.
     /// </summary>
 
     public partial class ToggleContent_Controller : UserControl
     {
+        //Set the position of the highlighting element, the black one.
         private Thickness JsonContent = new Thickness(0, 0, 0, 0);
         private Thickness EXIFContent = new Thickness(50, 0, 0, 0);
-        public ContentType PreviousContentType = ContentType.EXIF;
-        private Dictionary<ContentType, Thickness> animation_dictionary = new Dictionary<ContentType, Thickness>();
-        public event EventHandler<ContentType> ContentType_Changed;
+        public ContentType PreviousContentType = ContentType.EXIF; //This is used as the reference for the highlighting element above.
+        private Dictionary<ContentType, Thickness> animation_dictionary = new Dictionary<ContentType, Thickness>(); //This dictionary stores 2 types of animation (from EXIF to JSON, from JSON to EXIF)
+        public event EventHandler<ContentType> ContentType_Changed; //Evoked when the user clicks on one of the two types.
 
         public ToggleContent_Controller()
         {
@@ -52,6 +53,8 @@ namespace Google_Drive_Organizer_V3.Controls.ImageContentViewers
                 Duration = TimeSpan.FromSeconds(.2),
             };
             ContentSelection_Rectangle.BeginAnimation(MarginProperty, selection_animation);
+
+            //Change the font weight (make it bold or regular) as the display type (EXIF, JSON) changes.
             (MainControl.FindName(PreviousContentType.ToString() + "Label") as Label).FontWeight = FontWeights.Regular;
             (MainControl.FindName(PreviousContentType.ToString() + "Label") as Label).Foreground = Resources["ColorPrimary"] as SolidColorBrush;
             (MainControl.FindName(CurrentContentType.ToString() + "Label") as Label).FontWeight = FontWeights.Bold;

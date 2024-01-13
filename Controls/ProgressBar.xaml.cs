@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 namespace Google_Drive_Organizer_V3.Pages
 {
     /// <summary>
-    /// ProgressBar.xaml 的互動邏輯
+    /// Progress bar for all the progress reporting throughout the application.
     /// </summary>
     public partial class ProgressBar : UserControl
     {
@@ -33,6 +33,7 @@ namespace Google_Drive_Organizer_V3.Pages
         /// 
         private double Percentage;
 
+        //When this attribute changes, the progress of the progress bar will also change.
         public double percentage
         {
             get { return Percentage; }
@@ -46,27 +47,15 @@ namespace Google_Drive_Organizer_V3.Pages
             }
         }
 
+        //This is to dynamically adjust the width percentage bar and the main bar when the size of the component changes.
         private void ProgressBar_Main_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             TimeSpan Animation_Duration = TimeSpan.FromSeconds(.2);
             UpDate_Background_Rec_Size(e.NewSize.Width, Animation_Duration);
             UpDate_Percentage(percentage, Animation_Duration);
-            //DoubleAnimation Background_Rec_Animation = new DoubleAnimation(Background_Rec.RenderSize.Width, e.NewSize.Width, Animation_Duration);
-            //Background_Rec_Animation.DecelerationRatio = .7;
-            //Storyboard.SetTarget(Background_Rec_Animation, Background_Rec);
-            //Storyboard.SetTargetProperty(Background_Rec_Animation, new PropertyPath(WidthProperty));
-            //Storyboard Background_Rec_Storyboard = new Storyboard();
-            //Background_Rec_Animation.Duration = Animation_Duration;
-            //Background_Rec_Storyboard.Children.Add(Background_Rec_Animation);
-            //Background_Rec_Storyboard.Begin();
-            //DoubleAnimation ProgressBar_Rec_Animation = new DoubleAnimation(ProgressBar_Rec.RenderSize.Width, e.NewSize.Width * Percentage, Animation_Duration);
-            //Storyboard.SetTarget(ProgressBar_Rec_Animation, ProgressBar_Rec);
-            //Storyboard.SetTargetProperty(ProgressBar_Rec_Animation, new PropertyPath(WidthProperty));
-            //Storyboard ProgressBar_Rec_Storyboard = new Storyboard();
-            //ProgressBar_Rec_Storyboard.Duration = Animation_Duration;
-            //ProgressBar_Rec_Storyboard.Children.Add(ProgressBar_Rec_Animation);
-            //ProgressBar_Rec_Storyboard.Begin();
         }
+        
+        //Update both the text and the width of the bar.
         private void UpDate_Percentage(double percentage, TimeSpan duration)
         {
             if (percentage * ProgressBar_Main.RenderSize.Width > ProgressBar_Main.RenderSize.Height)
@@ -78,12 +67,14 @@ namespace Google_Drive_Organizer_V3.Pages
             }
             Percentage_Label.Content = percentage * 100 + "%";
         }
+        //Update the background rectangle (the bar behind the current progress)
         private void UpDate_Background_Rec_Size(double new_size, TimeSpan duration)
         {
             DoubleAnimation Background_Rec_Animation = new DoubleAnimation(Background_Rec.RenderSize.Width, new_size, duration);
             Background_Rec_Animation.DecelerationRatio = .7;
             Background_Rec.BeginAnimation(WidthProperty, Background_Rec_Animation);
         }
+
         private void ProgressBar_Main_Loaded(object sender, RoutedEventArgs e)
         {
             ProgressBar_Rec.Width = ProgressBar_Main.RenderSize.Width * Percentage;

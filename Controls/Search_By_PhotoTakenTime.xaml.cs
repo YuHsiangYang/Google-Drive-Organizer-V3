@@ -17,12 +17,13 @@ using System.Windows.Shapes;
 namespace Google_Drive_Organizer_V3.Controls
 {
     /// <summary>
-    /// Search_By_PhotoTakenTime.xaml 的互動邏輯
+    /// Use combobox to search the images based on the take time retrieved from the JSON files.
     /// </summary>
     public partial class Search_By_PhotoTakenTime : UserControl
     {
         public Search_By_PhotoTakenTime()
         {
+            //Add the option to search for all dates
             InitializeComponent();
             year.Add(ApplicationVariables.AllDate);
             Year.SelectedIndex = 0;
@@ -41,10 +42,13 @@ namespace Google_Drive_Organizer_V3.Controls
         public event EventHandler<Dictionary<DateTypes, int>> SelectedDateChanged;
         private void DateInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SelectedDate = new Dictionary<DateTypes, int>();
-            SelectedDate.Add(DateTypes.Year, (int)(Year.SelectedValue.ToString() == ApplicationVariables.AllDate && Year.SelectedValue != null ? 0 : int.Parse(Year.SelectedValue.ToString())));
-            SelectedDate.Add(DateTypes.Month, (int)(Month.SelectedValue.ToString() == ApplicationVariables.AllDate && Month.SelectedValue != null ? 0 : int.Parse(Month.SelectedValue.ToString())));
-            SelectedDate.Add(DateTypes.Day, (int)(Day.SelectedValue.ToString() == ApplicationVariables.AllDate && Day.SelectedValue != null ? 0 : int.Parse(Day.SelectedValue.ToString())));
+            //convert the "all date" text to the format that is readable by the program. 0 if all date is selected. Else if the other dates is selected.
+            SelectedDate = new Dictionary<DateTypes, int>
+            {
+                { DateTypes.Year, (int)(Year.SelectedValue.ToString() == ApplicationVariables.AllDate && Year.SelectedValue != null ? 0 : int.Parse(Year.SelectedValue.ToString())) },
+                { DateTypes.Month, (int)(Month.SelectedValue.ToString() == ApplicationVariables.AllDate && Month.SelectedValue != null ? 0 : int.Parse(Month.SelectedValue.ToString())) },
+                { DateTypes.Day, (int)(Day.SelectedValue.ToString() == ApplicationVariables.AllDate && Day.SelectedValue != null ? 0 : int.Parse(Day.SelectedValue.ToString())) }
+            };
             SelectedDateChanged?.Invoke(this, SelectedDate);
         }
         public async Task LoadPhotoTakenTimeComboboxItem(List<ImageExif> Exifs)
@@ -72,20 +76,14 @@ namespace Google_Drive_Organizer_V3.Controls
                 day.Reverse();
             });
 
-            //Year.ItemsSource = year;
-            //Month.ItemsSource = month;
-            //Day.ItemsSource = day;
 
             Year.ItemsSource = year;
-            //Year.SelectedIndex = 0;
             Year.SelectionChanged += DateInput_SelectionChanged;
 
             Month.ItemsSource = month;
-            //Month.SelectedIndex = 0;
             Month.SelectionChanged += DateInput_SelectionChanged;
 
             Day.ItemsSource = day;
-            //Day.SelectedIndex = 0;
             Day.SelectionChanged += DateInput_SelectionChanged;
 
             Console.WriteLine(
