@@ -59,7 +59,7 @@ namespace Google_Drive_Organizer_V3.Controls.ImageContentViewers
 
             if (PreviousContentType != CurrentContentType)
             {
-                ContentType_Changed?.Invoke(this, CurrentContentType);
+                ContentType_Changed?.Invoke(this, CurrentContentType);//Trigger the eventhandler when the user clicks on the other type.
             }
             PreviousContentType = CurrentContentType;
         }
