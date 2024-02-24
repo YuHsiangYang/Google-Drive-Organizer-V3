@@ -1,120 +1,122 @@
+其他語言: [English](ReadME-en.md)
+
 # Google Drive Organizer V3
 
-# Overview
+# 概觀
 
-This program is intended to solve the issues with the downloaded images. When the photos are exported from Google Photo, the metadata are being removed. This causes a problem for the other platforms to arrange the images. Since there is no photo taken time given in the image, the software can only use the data downloaded from Google Photos to organize the images. This method of arrangement leads to the problem in which images are not arranged in proper order. Therefore, my program is to solve this issue by using the JSON file to restore the missing information.
+這個程式旨在解決從 Google 相片下載的圖片問題。當圖片從 Google 相片匯出時，會移除相片拍攝資訊。這導致其他平台例如(Synology Photos)難以排列圖片。由於圖片中沒有拍攝時間的資訊，軟體只能使用從 Google 相片下載的資料來整理圖片。這種排列方式導致了圖片無法按照正確的順序排列的問題。因此，我的程式通過使用 JSON 檔案來恢復遺失的資訊來解決此問題。
 
-# Main components overview
+# 主要組件概觀
 
-**Progress bar —** Used for progress visualization.
+**進度條 —** 用於進度視覺化。
 
-**Search control —** The general component used to search for images by file name and photo taken time.
+**搜尋控制 —** 用於按文件名和拍攝時間搜尋圖片的組件。
 
-**Stage navigation —** Used for navigating throughout the process. This is the control for the user to proceed to next page or previous page.
+**階段導覽 —** 用於在整個過程中導覽。用於控制下一頁或上一頁。
 
-**Display types (Folder) —** This folder contains the components for two different display types, icon and List.
+**顯示類型（資料夾） —** 此資料夾包含兩種不同顯示類型（圖示和列表）的組件。
 
-**Image content viewers —** Contains the different views of Exif data.
+**圖片內容查看器 —** 包含 Exif 數據的不同視圖。
 
-**Exif_ContentViewer —** The view for Exif data retrieved from JSON file.
+**Exif_ContentViewer —** 用於檢視JSON檔案資料。
 
-**Image_DataViewer —** View the data contained in the image.
+**Image_DataViewer —** 查看圖片中包含的資料。
 
-**Json_ContentViewer —** View the information contained in the JSON file.
+**Json_ContentViewer —** 查看 JSON 檔案中包含的資訊。
 
-**Sort controller —** This controller controls the types (file name or photo taken time) of sort and manner (ascending or descending).
+**排序控制器 —** 此控制器控制排序類型（文件名稱或拍攝時間）和方式（由新至舊或由舊至新）。
 
-**DeleteButton —** To exclude a particular/collection of images from the merging process.
+**刪除按鈕 —** 從合併過程中排除特定/一組圖片。
 
-# Project outline
-## Features:
+# 專案大綱
+## 功能：
 
-- Importing
-    - Retrieving json from a separate directory
-    - import image manually
-    - import images in a directory
-    - Select the json file manually
-- Editing & Processing
-    - View the images in small icon
-    - Apply the information from json to both vide and image files
-    - Edit the **exif** info of the image
-        - GPS coordination using google map
-        - Photo taken time
-- Navigating
-    - Select multiple images to remove from the list
-        - There should be a check box for each image
-        - When checked, a trash bin should appear
-    - sort images by file name and photo taken time
-        - A combo box used to select the type;
-        - and another select the manner (ascending or descending)
-    - Search images by filename and photo taken time.
-- Logging
-    - Create a log file for the applying of info
+- 匯入
+    - 從不同目錄搜尋 JSON
+    - 手動匯入圖片
+    - 從目錄匯入圖片
+    - 手動選擇 JSON 檔案
+- 編輯與處理
+    - 小圖示中查看圖片
+    - 將 JSON 中的資訊套用至圖片
+    - 編輯圖片的 **exif** 資訊
+        - 使用 Google 地圖的 GPS 座標
+        - 拍攝時間
+- 導覽
+    - 選擇多個圖片以從列表中刪除
+        - 每張圖片應該有一個勾選框
+        - 勾選後，應該出現垃圾桶圖示
+    - 按文件名和拍攝時間排序圖片
+        - 使用下拉框選擇類型；
+        - 另一個選擇方式（升序或降序）
+    - 按文件名和拍攝時間搜索圖片。
+- 日誌
+    - 建立應用資訊的日誌檔案
 
-## Stages
+## 階段
 
-### Build the API for applying & modifying Exif data
+### 建立應用和修改 Exif 數據的 API
 
-1. Python script
+1. Python 腳本
     
-    Format of the json map file:
-    
-    ```json
-    {
-    	"<EXIF tag (exiv2 tags)>": [<path>, <path>], //path to another document
-    }
-    ```
-    
-    Format for the json file that can be used for modifying exif data of an image:
+    JSON 映射文件的格式：
     
     ```json
     {
-    	"<EXIF tag>": <data in specified format>
+    	"<EXIF 標籤（exiv2 標籤）>": [<path>, <path>], // 路徑到另一個文件
     }
     ```
     
-    [Exiv2 - Image metadata library and tools](https://exiv2.org/tags.html)
+    用於修改圖片 exif 數據的 JSON 檔案的格式：
     
-2. Create executables
-    - Using the [PyInstaller](https://pyinstaller.org/en/stable/) library
+    ```json
+    {
+    	"<EXIF 標籤>": <指定格式的資料>
+    }
+    ```
+    
+    [Exiv2 - 圖片元數據庫和工具](https://exiv2.org/tags.html)
+    
+2. 建立可執行檔
+    - 使用 [PyInstaller](https://pyinstaller.org/en/stable/) 程式庫
 
-### Build the custom components
+### 建立自定義組件
 
-1. Button with corner radius using percentage
-2. Preview sidebar
-3. Stage monitor with animation and calling method
-4. Stage monitor with animation and calling method
-5. Trash bin
-6. Image icon
-7. Search bar
-8. Home page
-9. Control for displaying imported folders
-10. App Icon
+1. 使用百分比設置角半徑的按鈕
+2. 預覽側邊欄
+3. 帶有動畫和調用方法的階段監控器
+4. 帶有動畫和調用方法的階段監控器
+5. 垃圾桶
+6. 圖片圖示
+7. 搜尋欄
+8. 首頁
+9. 用於顯示導入資料夾的控制項
+10. 應用圖示
 
-### Main application
+### 主應用程式
 
-- Select json
-- Select images & videos
-- Search
-    - By file name
-    - by photo taken time
-- Different stages
-    - Page to select json
-    - Page to select images
-    - Page to select destination
-    - Page to display matched images
-        - Feature to display unmatched images
-    - Page to monitor the progress of copying and applying images
-        - Calling the script
+- 選擇 json
+- 選擇圖片
+- 搜尋
+    - 按文件名
+    - 按拍攝時間
+- 不同頁面
+    - 選擇 json 的頁面
+    - 選擇圖片的頁面
+    - 選擇目的地的頁面
+    - 顯示匹配圖片的頁面
+        - 顯示不匹配圖片的功能
+    - 監視複製和套用圖片進度的頁面
+        - 調用腳本
 
-### Unit tests
-- From sample
-- Actual testing
+### 單元測試
+- 從示例中
+- 實際測試
 
-This project outline was moved from my notion notebook. Link: [Program Design](https://yuhsiangnote.notion.site/Program-Design-23abb37d5e8e40369b7f80a4edff40e6?pvs=4) or https://yuhsiangnote.notion.site/Program-Design-23abb37d5e8e40369b7f80a4edff40e6?pvs=4
+此專案大綱已從我的 Notion 記事本移動。[程式設計](https://yuhsiangnote.notion.site/Program-Design-23abb37d5e8e40369b7f80a4edff40e6?pvs=4) 或 https://yuhsiangnote.notion.site/Program-Design-23abb37d5e8e40369b7f80a4edff40e6?pvs=4
 
-# References
-### icons used in my app:
+# 參考資料
+### 我的應用程式中使用的圖示：
 
 <a href="https://www.flaticon.com/free-icons/image" title="image icons">Image icons created by Pixel perfect - Flaticon</a>
 
@@ -126,6 +128,6 @@ This project outline was moved from my notion notebook. Link: [Program Design](h
 
 <a href="https://www.flaticon.com/free-icons/delete" title="delete icons">Delete icons created by Ilham Fitrotul Hayat - Flaticon</a>
 
-### Code references:
+### 代碼參考：
 
-Special thanks to the Stack Overflow community
+特別感謝 Stack Overflow 社群
