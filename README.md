@@ -98,7 +98,7 @@
 - 選擇 json
 - 選擇圖片
 - 搜尋
-    - 按文件名
+    - 按文件名稱
     - 按拍攝時間
 - 不同頁面
     - 選擇 json 的頁面
@@ -115,8 +115,12 @@
 
 此專案大綱已從我的 Notion 記事本移動。[程式設計](https://yuhsiangnote.notion.site/Program-Design-23abb37d5e8e40369b7f80a4edff40e6?pvs=4) 或 https://yuhsiangnote.notion.site/Program-Design-23abb37d5e8e40369b7f80a4edff40e6?pvs=4
 
+
+## 示範影片:
+[Demonstration](/Program-demonstration.mp4)
+
 # 參考資料
-### 我的應用程式中使用的圖示：
+### 我的應用程式中使用的圖案：
 
 <a href="https://www.flaticon.com/free-icons/image" title="image icons">Image icons created by Pixel perfect - Flaticon</a>
 
@@ -128,6 +132,6 @@
 
 <a href="https://www.flaticon.com/free-icons/delete" title="delete icons">Delete icons created by Ilham Fitrotul Hayat - Flaticon</a>
 
-### 代碼參考：
+### 程式碼參考：
 
 特別感謝 Stack Overflow 社群
